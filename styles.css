@@ -4,7 +4,10 @@
   padding: 0;
   box-sizing: border-box;
 }
- 
+
+body {
+  font-family: sans-serif;
+}
 
 /* Navbar */
 .navbar {
@@ -42,49 +45,71 @@
   color: #ff9800;
 }
 
-/* Slider */
-/* Slider box */
+/* --- SMOOTH SLIDING GALLERY STYLES --- */
+
+/* Slider container */
 .marquee-box {
-  position: relative;
-  width: 80vw;          /* adjust width */
-  height: 80vh;         /* adjust height */
-  overflow: hidden;     /* hide overflow for smooth scroll */
-  margin: 5% auto;      /* center horizontally */
+  width: 80vw;
+  height: 80vh;
+  margin: 120px auto 50px auto;
   border-radius: 12px;
-  background: #fff;     /* white bg so images look neat */
+  border: 1px solid #ddd;
+  overflow: hidden; /* This hides the other images */
 }
 
-/* Content inside slider */
+/* Content inside slider (the row of images) */
 .marquee-content {
-  display: flex;               /* align images in a row */
-  width: calc(200%);           /* double width for loop */
-  animation: scroll 30s linear infinite; /* continuous scroll */
+  display: flex;
+  width: 500%; /* 100% per image * 5 images */
+  height: 100%;
+  
+  /* Animation setup */
+  /* Duration: 15s total (allows for ~3s per slide + transition time) */
+  animation: scroll 15s ease-in-out infinite;
 }
 
 /* Images styling */
 .marquee-content img {
-  width: 80vw;      /* each image takes full box width */
-  height: 80vh;     /* match box height */
-  object-fit: cover; /* crop nicely */
+  width: 20%; /* Each image takes 1/5th of the container's width */
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Animation for horizontal scroll */
+/* Keyframes for the smooth scrolling animation */
 @keyframes scroll {
-  from {
-    transform: translateX(0);
+  /* Start: Show Image 1 */
+  0%, 20% {
+    transform: translateX(0%);
   }
-  to {
-    transform: translateX(-50%);
+  
+  /* Slide to and show Image 2 */
+  25%, 45% {
+    transform: translateX(-20%);
+  }
+  
+  /* Slide to and show Image 3 */
+  50%, 70% {
+    transform: translateX(-40%);
+  }
+  
+  /* Slide to and show Image 4 */
+  75%, 95% {
+    transform: translateX(-60%);
+  }
+
+  /* End: Slide back to the (duplicate) Image 1 */
+  100% {
+    transform: translateX(-80%);
   }
 }
 
+/* --- END OF SLIDER STYLES --- */
 
 /* Hero Section */
 .hero {
   text-align: center;
   padding: 60px 20px;
   background: #f9f9f9;
-  
 }
 
 .hero h1 {
@@ -138,11 +163,3 @@ footer {
   padding: 15px;
   margin-top: 30px;
 }
-
-
-
-
-
-
-
-
