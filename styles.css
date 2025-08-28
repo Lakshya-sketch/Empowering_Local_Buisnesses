@@ -1,0 +1,148 @@
+/* Reset default margins/paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #222;
+  color: #fff;
+  padding: 15px 50px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar .nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar .nav-links li a:hover {
+  color: #ff9800;
+}
+
+/* Slider */
+/* Slider box */
+.marquee-box {
+  position: relative;
+  width: 80vw;          /* adjust width */
+  height: 80vh;         /* adjust height */
+  overflow: hidden;     /* hide overflow for smooth scroll */
+  margin: 5% auto;      /* center horizontally */
+  border-radius: 12px;
+  background: #fff;     /* white bg so images look neat */
+}
+
+/* Content inside slider */
+.marquee-content {
+  display: flex;               /* align images in a row */
+  width: calc(200%);           /* double width for loop */
+  animation: scroll 30s linear infinite; /* continuous scroll */
+}
+
+/* Images styling */
+.marquee-content img {
+  width: 80vw;      /* each image takes full box width */
+  height: 80vh;     /* match box height */
+  object-fit: cover; /* crop nicely */
+}
+
+/* Animation for horizontal scroll */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f9f9f9;
+  
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* Categories */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.category-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-card img {
+  width: 70px;
+  margin-bottom: 10px;
+}
+
+.category-card h2 {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Footer */
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+
+
+
+
+
+
+
+
