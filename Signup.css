@@ -12,7 +12,7 @@ body {
     padding: 20px; /* Add padding for small screens */
 }
 
-/* --- Animated Background (No changes needed) --- */
+/* --- Animated Background --- */
 .background-animation {
     position: absolute;
     top: 0;
@@ -63,13 +63,13 @@ body {
 .l10 { top: 25vh; left: 80vw; animation: rotateAndTranslate1 10s linear infinite, fade 10s ease-in-out infinite; animation-delay: 1s, 0s; }
 .l11 { top: 50vh; left: 90vw; animation: rotateAndTranslate1 10s linear infinite, fade 10s ease-in-out infinite; animation-delay: 1s, 0s; }
 
-/* --- Login Card & Frosted Glass Effect --- */
-.login-card {
+/* --- Sign Up Card & Frosted Glass Effect --- */
+.signup-card {
     position: relative;
     z-index: 2;
-    width: 100%; /* Full width on mobile */
-    max-width: 400px; /* Max width for larger screens */
-    padding: 30px; /* Reduced padding on mobile */
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -80,9 +80,9 @@ body {
     text-align: center;
 }
 
-/* --- Login Card Content --- */
+/* --- Card Content --- */
 .profile-icon {
-    width: 70px; /* Smaller on mobile */
+    width: 70px;
     height: 70px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.2);
@@ -100,23 +100,23 @@ body {
     object-fit: cover;
 }
 
-.login-card h2 {
+.signup-card h2 {
     margin-bottom: 10px;
     font-weight: 600;
-    font-size: 22px; /* Adjusted for mobile */
+    font-size: 22px;
 }
 
-.login-card p {
+.signup-card p {
     margin-bottom: 25px;
     color: #cccccc;
     font-size: 14px;
 }
 
 /* --- Form Styling --- */
-.login-form {
+.signup-form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Tighter gap on mobile */
+    gap: 15px;
 }
 
 .input-group {
@@ -143,21 +143,13 @@ body {
 .input-group input::placeholder { color: #bbbbbb; }
 .input-group input:focus { outline: none; border-color: #00b3ff; }
 
-.forgot-password {
-    text-align: right;
-    font-size: 12px;
-    color: #00b3ff;
-    text-decoration: none;
-    margin-top: -5px; /* Adjusted spacing */
-}
-
 /* --- Validation Message Styles --- */
 .message {
     padding: 10px;
     border-radius: 5px;
     text-align: center;
     font-weight: 500;
-    margin-top: 0;
+    margin-top: 5px;
     display: none;
 }
 
@@ -173,7 +165,7 @@ body {
     display: block;
 }
 
-.login-button {
+.signup-button {
     padding: 15px;
     border: none;
     border-radius: 8px;
@@ -183,45 +175,41 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 5px;
 }
 
-.login-button:hover { background-color: #0099e6; }
+.signup-button:hover { background-color: #0099e6; }
 
-/* --- Sign Up Link --- */
-.signup-link {
+/* --- Sign In Link --- */
+.signin-link {
     margin-top: 20px;
     font-size: 14px;
 }
 
-.signup-link a {
+.signin-link a {
     color: #00b3ff;
     font-weight: 600;
     text-decoration: none;
 }
 
-/* --- RESPONSIVE STYLES --- */
-
-/* For Tablets and larger devices */
+/* --- RESPONSIVE STYLES using a Media Query --- */
+/* These styles will only apply when the screen is 768px or wider */
 @media (min-width: 768px) {
-    .login-card {
-        padding: 40px; /* Restore original padding */
+    .signup-card {
+        padding: 40px;
     }
-    
+
     .profile-icon {
-        width: 80px; /* Restore original size */
+        width: 80px;
         height: 80px;
         margin-bottom: 20px;
     }
-    
-    .login-card h2 {
-        font-size: 24px; /* Restore original font size */
-    }
-    
-    .login-form {
-        gap: 20px; /* Restore original gap */
+
+    .signup-card h2 {
+        font-size: 24px;
     }
 
-    .forgot-password {
-        margin-top: -10px; /* Restore original spacing */
+    .signup-button {
+        margin-top: 10px;
     }
 }
