@@ -1,8 +1,20 @@
+/* Reset */
+* {
 /* --- Basic Setup & Background --- */
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #fdfdfd;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navbar */
   font-family: Arial, sans-serif;
   background-color: #010021;
   overflow-x: hidden;
@@ -79,13 +91,14 @@ body {
   color: white;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.logo { font-size: 1.8rem; font-weight: bold; }
-.nav-links { list-style: none; display: flex; gap: 1.5rem; }
-.nav-links a { color: white; text-decoration: none; font-weight: 500; }
-.nav-links a:hover { text-decoration: underline; }
 
-/* --- Hero Section --- */
-.hero {
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar .nav-links {
+  list-style: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -102,26 +115,32 @@ body {
 }
 
 .marquee-box {
-  width: 100%; /* Slider takes full width of its container */
-  height: 450px; /* Adjust height to fit the layout */
+  width: 80vw;
+  height: 80vh;
+  margin: 120px auto 50px auto;
   border-radius: 12px;
   overflow: hidden; /* This hides the other images */
 }
 
 .marquee-content {
   display: flex;
-  width: 500%; /* 100% per image * 5 images */
+  width: 500%;
   height: 100%;
   animation: scroll 15s ease-in-out infinite;
 }
 
 .marquee-content img {
-  width: 20%; /* Each image takes 1/5th of the container's width */
+  width: 20%;
   height: 100%;
   object-fit: cover;
 }
 
 @keyframes scroll {
+  0%, 20% { transform: translateX(0%); }
+  25%, 45% { transform: translateX(-20%); }
+  50%, 70% { transform: translateX(-40%); }
+  75%, 95% { transform: translateX(-60%); }
+  100% { transform: translateX(-80%); }
   0%, 20% { transform: translateX(0%); }
   25%, 45% { transform: translateX(-20%); }
   50%, 70% { transform: translateX(-40%); }
@@ -161,17 +180,24 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .category-card img {
-  width: 60px; /* Adjusted size */
-  height: 60px;
-  margin-bottom: 0.5rem;
+  width: 70px;
+  margin-bottom: 10px;
 }
 .category-card h2 {
-  font-size: 1.1rem; /* Adjusted size */
-  color: #2b7a78;
+  font-size: 1rem;
+  color: #333;
 }
-.category-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+/* Responsive Categories */
+@media (max-width: 768px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .categories {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* --- Footer --- */
