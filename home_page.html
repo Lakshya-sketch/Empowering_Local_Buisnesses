@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LocalBizConnect</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -12,59 +13,98 @@
   <nav class="navbar">
     <div class="logo">LocalBizConnect</div>
     <ul class="nav-links">
-      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">Home</a></li>
       <li><a href="about.html">About Us</a></li>
-      <li><a href="#">Services</a></li>
+      <li><a href="Service-Template.html">Services</a></li>
       <li><a href="#">Contact Us</a></li>
-      <li><a href="Login.html">Login</a></li>
+      <li><a href="#">Login</a></li>
       <li><a href="#">Register</a></li>
     </ul>
   </nav>
 
-  <!-- Smooth Sliding Gallery -->
-  <div class="marquee-box">
-    <div class="marquee-content">
-      <img src="images.jpeg" alt="Plumber" />
-      <img src="1607611402-GettyImages-1223488572.jpg" alt="Medical Supplies" />
-      <img src="3-Possible-Careers-after-Plumbing-School.jpg" alt="Support Local" />
-      <img src="tim-mossholder-qvWnGmoTbik-unsplash.jpg" alt="Community" />
-      <img src="3-Possible-Careers-after-Plumbing-School copy.jpg" alt="Plumber Repeat" />
-    </div>
-  </div>
-
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-content">
+    <!-- Slideshow -->
+    <div class="slideshow">
+      <div class="slide-track">
+        <img src="https://img.freepik.com/free-vector/local-business-concept-illustration_114360-9316.jpg" alt="Slide 1">
+        <img src="https://img.freepik.com/free-vector/store-concept-illustration_114360-2506.jpg" alt="Slide 2">
+        <img src="https://img.freepik.com/free-vector/delivery-service-concept_23-2148505081.jpg" alt="Slide 3">
+        <img src="https://img.freepik.com/free-vector/online-shopping-concept_23-2148533388.jpg" alt="Slide 4">
+        <img src="https://img.freepik.com/free-vector/customer-support-flat-illustration_23-2148899105.jpg" alt="Slide 5">
+        <!-- Repeat for infinite effect -->
+        <img src="https://img.freepik.com/free-vector/local-business-concept-illustration_114360-9316.jpg" alt="Slide 1">
+        <img src="https://img.freepik.com/free-vector/store-concept-illustration_114360-2506.jpg" alt="Slide 2">
+      </div>
+    </div>
+
+    <div class="hero-right">
       <h1>Empowering Local Businesses</h1>
-      <p>Connect directly with shopkeepers, service providers, and delivery partners in your town.</p>
+      <p>Connect directly with shopkeepers, service providers, and delivery partners in your town</p>
+      
+      <div class="categories">
+        <div class="category-card">
+          <img src="https://img.icons8.com/ios/100/grocery-bag.png" alt="Grocery">
+          <h2>Grocery</h2>
+        </div>
+
+        <div class="category-card">
+          <img src="https://img.icons8.com/ios/100/pill.png" alt="Medicine">
+          <h2>Medicine</h2>
+        </div>
+
+        <div class="category-card">
+          <img src="https://img.icons8.com/ios/100/plumbing.png" alt="Plumber">
+          <h2>Plumber</h2>
+        </div>
+
+        <div class="category-card">
+          <img src="https://img.icons8.com/ios/100/electrician.png" alt="Electrician">
+          <h2>Electrician</h2>
+        </div>
+
+        <div class="category-card">
+          <img src="https://img.icons8.com/ios/100/hammer.png" alt="Carpenter">
+          <h2>Carpenter</h2>
+        </div>
+
+        <div class="category-card">
+          <img src="https://img.icons8.com/ios/100/burger.png" alt="Ready-to-Eat">
+          <h2>Ready-to-Eat</h2>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Categories Section -->
-  <section class="categories">
-    <div class="category-card">
-      <img src="https://img.icons8.com/ios-filled/50/shopping-basket-2.png" alt="Grocery" />
-      <h2>Grocery</h2>
-    </div>
-    <div class="category-card">
-      <img src="https://img.icons8.com/ios/100/pill.png" alt="Medicine" />
-      <h2>Medicine</h2>
-    </div>
-    <div class="category-card">
-      <img src="https://img.icons8.com/ios/100/plumbing.png" alt="Plumber" />
-      <h2>Plumber</h2>
-    </div>
-    <div class="category-card">
-      <img src="https://img.icons8.com/external-outlines-amoghdesign/64/external-driver-car-maintenance-and-service-outlines-amoghdesign.png" alt="Electrician" />
-      <h2>Electrician</h2>
-    </div>
-    <div class="category-card">
-      <img src="https://img.icons8.com/ios/100/hammer.png" alt="Carpenter" />
-      <h2>Carpenter</h2>
-    </div>
-    <div class="category-card">
-      <img src="https://img.icons8.com/pastel-glyph/50/beach-cocktail.png" alt="Ready-to-Eat" />
-      <h2>Ready-to-Eat</h2>
+  <!-- How It Works Section -->
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <p class="subtitle">Getting the help you need is just a few taps away</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="icon">🔍</div>
+        <h3>Search & Browse</h3>
+        <p>Find the service you need or browse daily essentials from local stores</p>
+      </div>
+
+      <div class="step">
+        <div class="icon">👤</div>
+        <h3>Choose Provider</h3>
+        <p>Select from verified professionals or trusted local shops near you</p>
+      </div>
+
+      <div class="step">
+        <div class="icon">📅</div>
+        <h3>Book & Schedule</h3>
+        <p>Book instantly or schedule for later with flexible timing options</p>
+      </div>
+
+      <div class="step">
+        <div class="icon">✅</div>
+        <h3>Get Service</h3>
+        <p>Enjoy quality service with real-time tracking and support</p>
+      </div>
     </div>
   </section>
 
@@ -75,3 +115,4 @@
 
 </body>
 </html>
+
