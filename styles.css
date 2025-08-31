@@ -60,8 +60,8 @@ body {
 
 /* Slideshow */
 .slideshow {
-  width: 530px;
-  height: 600px;
+  width: 45vw;
+  height: 90vh;
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(7, 170, 220, 0.2);
@@ -75,8 +75,8 @@ body {
 }
 
 .slide-track img {
-  width: 530px;
-  height: 600px;
+  width: 45vw;
+  height: 100vh;
   object-fit: cover;
 }
 
