@@ -46,7 +46,7 @@ body {
     position: absolute;
     height: 100px;
     width: 20px;
-    background-color: rgb(0, 179, 255);
+    background-color: rgb(237, 122, 68);
     border-radius: 10px;
     box-shadow: 0 0 20px 5px rgba(0, 179, 255, 0.7);
 }
