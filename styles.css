@@ -1,4 +1,4 @@
-/* Reset default margins/paddings */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +6,10 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #b4c3ed, #212845); /* Dark gradient */
+  color: #f5f5f5;
+  line-height: 1.6;
 }
 
 /* Navbar */
@@ -14,152 +17,204 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #222;
+  background: #01234d;
   color: #fff;
-  padding: 15px 50px;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10;
+  padding: 15px 40px;
 }
 
-.navbar .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+.logo {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
 }
 
-.navbar .nav-links {
-  list-style: none;
+.nav-links {
   display: flex;
-  gap: 20px;
+  list-style: none;
 }
 
-.navbar .nav-links li a {
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
   text-decoration: none;
-  color: white;
+  color: #fff;
   font-weight: 500;
   transition: color 0.3s;
 }
 
-.navbar .nav-links li a:hover {
-  color: #ff9800;
+.nav-links a:hover {
+  color: #FFD93D; /* Yellow hover */
 }
-
-/* --- SMOOTH SLIDING GALLERY STYLES --- */
-
-/* Slider container */
-.marquee-box {
-  width: 80vw;
-  height: 80vh;
-  margin: 120px auto 50px auto;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  overflow: hidden; /* This hides the other images */
-}
-
-/* Content inside slider (the row of images) */
-.marquee-content {
-  display: flex;
-  width: 500%; /* 100% per image * 5 images */
-  height: 100%;
-  
-  /* Animation setup */
-  /* Duration: 15s total (allows for ~3s per slide + transition time) */
-  animation: scroll 15s ease-in-out infinite;
-}
-
-/* Images styling */
-.marquee-content img {
-  width: 20%; /* Each image takes 1/5th of the container's width */
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Keyframes for the smooth scrolling animation */
-@keyframes scroll {
-  /* Start: Show Image 1 */
-  0%, 20% {
-    transform: translateX(0%);
-  }
-  
-  /* Slide to and show Image 2 */
-  25%, 45% {
-    transform: translateX(-20%);
-  }
-  
-  /* Slide to and show Image 3 */
-  50%, 70% {
-    transform: translateX(-40%);
-  }
-  
-  /* Slide to and show Image 4 */
-  75%, 95% {
-    transform: translateX(-60%);
-  }
-
-  /* End: Slide back to the (duplicate) Image 1 */
-  100% {
-    transform: translateX(-80%);
-  }
-}
-
-/* --- END OF SLIDER STYLES --- */
 
 /* Hero Section */
 .hero {
-  text-align: center;
-  padding: 60px 20px;
-  background: #f9f9f9;
-}
-
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 40px;
-}
-
-/* Categories */
-.categories {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 50px;
+  gap: 40px;
+}
+
+/* Slideshow */
+.slideshow {
+  width: 45vw;
+  height: 90vh;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(7, 170, 220, 0.2);
+  border: 3px solid #f2e7e3;
+}
+
+.slide-track {
+  display: flex;
+  width: calc(530px * 7);   /* match image width */
+  animation: scroll 30s linear infinite;
+}
+
+.slide-track img {
+  width: 45vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-2650px); } /* 530px * 5 (for smooth loop) */
+}
+
+/* Hero Right (Domains) */
+.hero-right {
+  max-width: 600px;
+}
+
+.hero-right h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.8rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.hero-right p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #ddd;
+}
+
+/* Categories (Domains) */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .category-card {
-  background: #fff;
-  border-radius: 10px;
+  background: #c3cfe1;
   padding: 20px;
-  width: 150px;
+  border-radius: 15px;
   text-align: center;
-  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
+  box-shadow: 0 4px 12px rgba(241, 238, 238, 0.6);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
 }
 
 .category-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  background: #FF6F3C;
+  border-color: #FFD93D;
+  color: #140606;
 }
 
-.category-card img {
-  width: 70px;
+.category-card h2,
+.category-card p {
+  color: #120202;
+  transition: color 0.3s ease;
+  font-weight: 700;
+}
+
+.category-card:hover h2,
+.category-card:hover p {
+  color: #FFD93D;
+}
+
+/* How It Works Section */
+.how-it-works {
+  text-align: center;
+  padding: 60px 20px;
+  background: #1e2a47;
+  border-top: 3px solid #FFD93D;
+}
+
+.how-it-works h2 {
+  font-size: 2.5rem;
+  color: #FFD93D;
   margin-bottom: 10px;
 }
 
-.category-card h2 {
-  font-size: 1rem;
+.how-it-works .subtitle {
+  color: #ddd;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.step {
+  background: #c3cfe1;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+  border: 2px solid transparent;
+}
+
+.step:hover {
+  transform: translateY(-8px);
+  background: #FF6F3C;
+  border-color: #FFD93D;
+  color: #fff;
+}
+
+.step h3 {
+  margin: 15px 0;
+  color: #222;
+  font-weight: 700;
+}
+
+.step p {
+  font-size: 0.95rem;
   color: #333;
+}
+
+.icon {
+  font-size: 2.2rem;
+  background: #FFD93D;
+  color: #222;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  font-weight: bold;
 }
 
 /* Footer */
 footer {
-  background: #222;
-  color: white;
   text-align: center;
-  padding: 15px;
-  margin-top: 30px;
+  padding: 20px;
+  background: #01234d;
+  color: #fff;
+  font-size: 0.9rem;
+  border-top: 2px solid #FFD93D;
 }
+
