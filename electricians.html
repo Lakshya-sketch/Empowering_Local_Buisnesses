@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <!-- Header with Navbar -->
@@ -34,29 +36,39 @@
     <!-- Main Content Area -->
     <main class="main-content">
         <section class="services-hero">
-             
-            <!-- NEW: Service Filter Thumbnails -->
             <div class="service-filter">
-                <div class="filter-card">
-                    <img src="https://i.ibb.co/C0WbtdT/plumber-icon.png" alt="Plumbers">
-                    <span>Plumbers <li><a href="Service-Template.html">Plumbers</a></li></span>
-                </div>
-                <div class="filter-card active">
-                    <img src="https://i.ibb.co/P9tPqBv/electrician-icon.png" alt="Electricians">
-                    <span>Electricians </span>
-                </div>
-                <div class="filter-card">
-                    <img src="https://i.ibb.co/hR4S7G8/carpenter-icon.png" alt="Carpenters">
-                    <span>Carpenters</span>
-                </div>
-                <div class="filter-card">
-                    <img src="https://i.ibb.co/5cQdMDc/grocery-icon.png" alt="Grocery">
-                    <span>Grocery</span>
-                </div>
-                <div class="filter-card">
-                    <img src="https://i.ibb.co/JqjT7M8/cleaning-icon.png" alt="Cleaning">
-                    <span>Cleaning</span>
-                </div>
+                <a href="Service-Template.html" class="filter-link">
+                    <div class="filter-card ">
+                        <img src="https://img.icons8.com/ios/100/plumbing.png" alt="Plumber">
+                        <span>Plumbers</span>
+                    </div>
+                </a>
+                <a href="electricians.html" class="filter-link">
+                    <div class="filter-card active">
+                        <img width="100" height="100" src="https://img.icons8.com/ios/100/screwdriver.png"
+                            alt="screwdriver" />
+                        <span>Electricians</span>
+                    </div>
+                </a>
+                <a href="carpenters.html" class="filter-link">
+                    <div class="filter-card">
+                        <img src="https://img.icons8.com/ios/100/hammer.png" alt="Carpenter">
+                        <span>Carpenters</span>
+                    </div>
+                </a>
+                <a href="grocery.html" class="filter-link">
+                    <div class="filter-card">
+                        <img width="90" height="100" src="https://img.icons8.com/ios/50/shopping-basket-2.png"
+                            alt="shopping-basket-2" />
+                        <span>Grocery</span>
+                    </div>
+                </a>
+                <a href="medicine.html" class="filter-link">
+                    <div class="filter-card">
+                        <img src="https://img.icons8.com/ios/100/pill.png" alt="Medicine">
+                        <span>Medicine</span>
+                    </div>
+                </a>
             </div>
             <!-- END OF NEW SECTION -->
 
@@ -67,21 +79,14 @@
         <!-- Service Provider Listings Table -->
         <section class="provider-listings">
             <table class="provider-table">
-                <thead>
+                <tbody>
+                    <!-- Template Row 1 -->
                     <tr>
                         <th>Provider Profile</th>
                         <th>Details</th>
                         <th>Action</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <!-- Template Row 1 -->
-                     <tr>
-                        <th>Provider Profile</th>
-                        <th>Details</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+                    </thead>
                 <tbody>
                     <!-- TEMPLATE ROW 1: Copy this block for each new provider -->
                     <tr>
@@ -106,7 +111,7 @@
                                 <div class="detail-item"><strong>Experience:</strong> Experience </div>
                                 <div class="detail-item"><strong>Hiring Cost:</strong> Price</div>
                                 <div class="detail-item skills">
-                                    <strong>Skills:</strong> 
+                                    <strong>Skills:</strong>
                                     <span>Skill 1</span>
                                     <span>Skill 2</span>
                                     <span>Skill 3</span>
@@ -116,14 +121,6 @@
                         <td data-label="Action">
                             <button class="btn btn-primary">Book Now</button>
                         </td>
-                    </tr>
-                    <!-- End of Template Row 1 -->
-
-                    <!-- Template Row 2 -->
-                     <tr>
-                        <th>Provider Profile</th>
-                        <th>Details</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -150,7 +147,7 @@
                                 <div class="detail-item"><strong>Experience:</strong> Experience </div>
                                 <div class="detail-item"><strong>Hiring Cost:</strong> Price</div>
                                 <div class="detail-item skills">
-                                    <strong>Skills:</strong> 
+                                    <strong>Skills:</strong>
                                     <span>Skill 1</span>
                                     <span>Skill 2</span>
                                     <span>Skill 3</span>
@@ -173,16 +170,5 @@
     </footer>
 
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
