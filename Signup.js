@@ -1,59 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const signupForm = document.getElementById('signup-form');
-    const fullNameInput = document.getElementById('fullName');
-    const emailInput = document.getElementById('email');
+    const signupForm = document.getElementById('signupForm');
+    const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('confirm-password');
-    const messageElement = document.getElementById('message');
+    const usernameError = document.getElementById('usernameError');
+    const passwordError = document.getElementById('passwordError');
+    
+    // Function to show an error message and style the input
+    function showError(input, errorElement, message) {
+        errorElement.textContent = message;
+        input.classList.remove('valid');
+        input.classList.add('invalid');
+    }
 
-    signupForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Prevent form from submitting right away
+    // Function to show a success state (valid input)
+    function showSuccess(input, errorElement) {
+        errorElement.textContent = ''; // Clear the error message
+        input.classList.remove('invalid');
+        input.classList.add('valid');
+    }
 
-        // Get user input
-        const fullName = fullNameInput.value.trim();
-        const email = emailInput.value.trim();
-        const password = passwordInput.value;
-        const confirmPassword = confirmPasswordInput.value;
-        
-        // --- Form Validation ---
+    // --- Inline Username Validation ---
+    usernameInput.addEventListener('input', () => {
+        const username = usernameInput.value;
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const userExists = users.some(u => u.username === username);
 
-        // 1. Check if any fields are empty
-        if (!fullName || !email || !password || !confirmPassword) {
-            showMessage('All fields are required.', 'error');
-            return; // Stop execution
+        if (username.length < 4) {
+            showError(usernameInput, usernameError, 'Username must be at least 4 characters long.');
+        } else if (userExists) {
+            showError(usernameInput, usernameError, 'Username is already taken.');
+        } else {
+            showSuccess(usernameInput, usernameError);
         }
-
-        // 2. Validate email format (simple check)
-        if (!email.includes('@') || !email.includes('.')) {
-            showMessage('Please enter a valid email address.', 'error');
-            return;
-        }
-
-        // 3. Check password length
-        if (password.length < 8) {
-            showMessage('Password must be at least 8 characters long.', 'error');
-            return;
-        }
-
-        // 4. Check if passwords match
-        if (password !== confirmPassword) {
-            showMessage('Passwords do not match. Please try again.', 'error');
-            return;
-        }
-
-        // --- If all validation passes ---
-        showMessage('Account created successfully! Redirecting to login...', 'success');
-
-        // Simulate saving the new user and then redirecting to the login page
-        // In a real app, you would send this data to your server.
-        setTimeout(() => {
-            window.location.href = 'login.html'; // Redirect to the login page
-        }, 2000); // Wait 2 seconds
     });
 
-    // Helper function to display messages to the user
-    function showMessage(message, type) {
-        messageElement.textContent = message;
-        messageElement.className = `message ${type}`; // e.g., 'message error'
+    // --- Inline Password Validation ---
+    passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value;
+
+        if (password.length < 8) {
+            showError(passwordInput, passwordError, 'Password must be at least 8 characters long.');
+        } else {
+            showSuccess(passwordInput, passwordError);
+        }
+    });
+
+    // --- Form Submission Logic ---
+    if (signupForm) {
+        signupForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            
+            // Re-check all validations on submit to be safe
+            const isUsernameValid = !usernameError.textContent && usernameInput.value.length > 0;
+            const isPasswordValid = !passwordError.textContent && passwordInput.value.length > 0;
+
+            if (isUsernameValid && isPasswordValid) {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                users.push({ username: usernameInput.value, password: passwordInput.value });
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                alert('Signup successful! Please log in.');
+                window.location.href = 'Login.html';
+            } else {
+                // If the user tries to submit with invalid fields, ensure errors are shown
+                if (usernameInput.value.length === 0) showError(usernameInput, usernameError, 'Username is required.');
+                if (passwordInput.value.length === 0) showError(passwordInput, passwordError, 'Password is required.');
+                
+                alert('Please fix the errors before submitting.');
+            }
+        });
     }
 });
