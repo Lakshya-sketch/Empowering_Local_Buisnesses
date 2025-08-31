@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LocalBizConnect</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocalBizConnect - Homepage</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Google Fonts for modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -12,8 +16,8 @@
   <nav class="navbar">
     <div class="logo">LocalBizConnect</div>
     <ul class="nav-links">
-      <li><a href="#" class="active">Home</a></li>
-      <li><a href="about.html">About Us</a></li>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About Us</a></li>
       <li><a href="#">Services</a></li>
       <li><a href="#">Contact Us</a></li>
       <li><a href="Login.html">Login</a></li>
@@ -21,57 +25,55 @@
     </ul>
   </nav>
 
-  <!-- Smooth Sliding Gallery -->
-  <div class="marquee-box">
-    <div class="marquee-content">
-      <img src="images.jpeg" alt="Plumber" />
-      <img src="1607611402-GettyImages-1223488572.jpg" alt="Medical Supplies" />
-      <img src="3-Possible-Careers-after-Plumbing-School.jpg" alt="Support Local" />
-      <img src="tim-mossholder-qvWnGmoTbik-unsplash.jpg" alt="Community" />
-      <img src="3-Possible-Careers-after-Plumbing-School copy.jpg" alt="Plumber Repeat" />
-    </div>
-  </div>
-
   <!-- Hero Section -->
-  <section class="hero">
+  <main class="hero-section">
     <div class="hero-content">
-      <h1>Empowering Local Businesses</h1>
-      <p>Connect directly with shopkeepers, service providers, and delivery partners in your town.</p>
-    </div>
-  </section>
+      <!-- Left Column: Image Slider -->
+      <div class="hero-left">
+        <div class="marquee-box">
+          <div class="marquee-content">
+            <img src="3-Possible-Careers-after-Plumbing-School copy.jpg" alt="Plumbing Service">
+            <img src="1607611402-GettyImages-1223488572.jpg" alt="Electrician at work">
+            <img src="Support Local Businesses.webp" alt="Support Local Businesses">
+            <img src="tim-mossholder-qvWnGmoTbik-unsplash.jpg" alt="Friendly plumber">
+          </div>
+        </div>
+      </div>
 
-  <!-- Categories Section -->
-  <section class="categories">
-    <div class="category-card">
-      <img src="https://img.icons8.com/ios-filled/50/shopping-basket-2.png" alt="Grocery" />
-      <h2>Grocery</h2>
+      <!-- Right Column: Text and Categories -->
+      <div class="hero-right">
+        <h1>Empowering Local Businesses</h1>
+        <p>Connect directly with shopkeepers, service providers, and delivery partners in your town</p>
+        
+        <div class="categories">
+          <div class="category-card">
+            <img src="https://img.icons8.com/ios-filled/50/shopping-basket-2.png" alt="Grocery Icon"/>
+            <h2>Grocery</h2>
+          </div>
+          <div class="category-card">
+            <img src="https://img.icons8.com/ios/100/pill.png" alt="Medicine Icon">
+            <h2>Medicine</h2>
+          </div>
+          <div class="category-card">
+            <img src="https://img.icons8.com/ios/100/plumbing.png" alt="Plumber Icon">
+            <h2>Plumber</h2>
+          </div>
+          <div class="category-card">
+            <img src="https://img.icons8.com/external-outlines-amoghdesign/64/external-driver-car-maintenance-and-service-outlines-amoghdesign.png" alt="Electrician Icon"/>
+            <h2>Electrician</h2>
+          </div>
+          <div class="category-card">
+            <img src="https://img.icons8.com/ios/100/hammer.png" alt="Carpenter Icon">
+            <h2>Carpenter</h2>
+          </div>
+          <div class="category-card">
+            <img src="https://img.icons8.com/pastel-glyph/50/beach-cocktail.png" alt="Ready-to-Eat Icon"/>
+            <h2>Ready-to-Eat</h2>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="category-card">
-      <img src="https://img.icons8.com/ios/100/pill.png" alt="Medicine" />
-      <h2>Medicine</h2>
-    </div>
-    <div class="category-card">
-      <img src="https://img.icons8.com/ios/100/plumbing.png" alt="Plumber" />
-      <h2>Plumber</h2>
-    </div>
-    <div class="category-card">
-      <img src="https://img.icons8.com/external-outlines-amoghdesign/64/external-driver-car-maintenance-and-service-outlines-amoghdesign.png" alt="Electrician" />
-      <h2>Electrician</h2>
-    </div>
-    <div class="category-card">
-      <img src="https://img.icons8.com/ios/100/hammer.png" alt="Carpenter" />
-      <h2>Carpenter</h2>
-    </div>
-    <div class="category-card">
-      <img src="https://img.icons8.com/pastel-glyph/50/beach-cocktail.png" alt="Ready-to-Eat" />
-      <h2>Ready-to-Eat</h2>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 LocalBizConnect | Empowering Communities</p>
-  </footer>
+  </main>
 
 </body>
 </html>
