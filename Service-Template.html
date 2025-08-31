@@ -11,6 +11,20 @@
 </head>
 <body>
 
+    <!-- Animated Stars Background -->
+    <div class="stars">
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+    </div>
+
     <!-- Header with Navbar -->
     <header class="header">
         <nav class="navbar">
@@ -18,12 +32,11 @@
             <ul class="nav-links">
                 <li><a href="home_page.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="Service-Template.html" class="active">Services</a></li>
                 <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
+                <li><a href="Login.html">Login</a></li>
+                <li><a href="Signup.html">Register</a></li>
             </ul>
-            <!-- Hamburger Menu Icon -->
             <div class="hamburger-menu">
                 <span></span>
                 <span></span>
@@ -32,11 +45,19 @@
         </nav>
     </header>
 
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav">
+        <a href="home_page.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="Service-Template.html">Services</a>
+        <a href="#">Contact Us</a>
+        <a href="Login.html">Login</a>
+        <a href="Signup.html">Register</a>
+    </div>
+
     <!-- Main Content Area -->
     <main class="main-content">
         <section class="services-hero">
-            
-            <!-- Service Filter Thumbnails (Now Clickable) -->
             <div class="service-filter">
                 <a href="plumbers.html" class="filter-link">
                     <div class="filter-card active">
@@ -46,7 +67,7 @@
                 </a>
                 <a href="electricians.html" class="filter-link">
                     <div class="filter-card">
-                        <img width="100" height="100" src="https://img.icons8.com/ios/100/screwdriver.png" alt="screwdriver"/>
+                        <img src="https://img.icons8.com/ios/100/screwdriver.png" alt="Electrician"/>
                         <span>Electricians</span>
                     </div>
                 </a>
@@ -58,7 +79,7 @@
                 </a>
                 <a href="grocery.html" class="filter-link">
                     <div class="filter-card">
-                        <img width="90" height="100" src="https://img.icons8.com/ios/50/shopping-basket-2.png" alt="shopping-basket-2"/>
+                        <img src="https://img.icons8.com/ios/50/shopping-basket-2.png" alt="Grocery"/>
                         <span>Grocery</span>
                     </div>
                 </a>
@@ -74,81 +95,51 @@
             <p>Browse our list of trusted, verified, and skilled experts near you.</p>
         </section>
 
-        <!-- Service Provider Listings Table -->
+        <!-- Service Provider Listings -->
         <section class="provider-listings">
-            <table class="provider-table">
-                <thead>
-                    <tr>
-                        <th>Provider Profile</th>
-                        <th>Details</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- TEMPLATE ROW 1: Copy this block for each new provider -->
-                    <tr>
-                        <td data-label="Provider Profile">
-                            <div class="profile-card">
-                                <img src="https://i.ibb.co/wYxXG3C/plumber1.jpg" alt="Service Provider">
-                                <div class="profile-info">
-                                    <h3>Raj Sharma</h3>
-                                    <p class="location">Patiala, Punjab</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-label="Details">
-                            <div class="details-content">
-                                <div class="detail-item availability available">
-                                    <strong>Status:</strong> <span>Available</span>
-                                </div>
-                                <div class="detail-item"><strong>Experience:</strong> 10+ Years</div>
-                                <div class="detail-item"><strong>Hiring Cost:</strong> ₹400/hr</div>
-                                <div class="detail-item skills">
-                                    <strong>Skills:</strong> 
-                                    <span>Leak Repair</span>
-                                    <span>Pipe Fitting</span>
-                                    <span>Drain Cleaning</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-label="Action">
-                            <button class="btn btn-primary">Book Now</button>
-                        </td>
-                    </tr>
-                    <!-- End of Template Row 1 -->
+            <div class="provider-card">
+                <div class="profile-section">
+                    <img src="https://i.ibb.co/wYxXG3C/plumber1.jpg" alt="Raj Sharma">
+                    <div class="profile-info">
+                        <h3>Raj Sharma</h3>
+                        <p class="location">Patiala, Punjab</p>
+                    </div>
+                </div>
+                <div class="details-section">
+                    <div class="detail-item availability available"><strong>Status:</strong> <span>Available</span></div>
+                    <div class="detail-item"><strong>Experience:</strong> 10+ Years</div>
+                    <div class="detail-item"><strong>Hiring Cost:</strong> ₹400/hr</div>
+                    <div class="detail-item skills">
+                        <strong>Skills:</strong> 
+                        <div><span>Leak Repair</span><span>Pipe Fitting</span><span>Drain Cleaning</span></div>
+                    </div>
+                </div>
+                <div class="action-section">
+                    <button class="btn btn-primary">Book Now</button>
+                </div>
+            </div>
 
-                    <!-- TEMPLATE ROW 2: Example of a busy provider -->
-                     <tr>
-                        <td data-label="Provider Profile">
-                            <div class="profile-card">
-                                <img src="https://i.ibb.co/6yN6MZS/plumber2.jpg" alt="Service Provider">
-                                <div class="profile-info">
-                                    <h3>Anil Kumar</h3>
-                                    <p class="location">Zirakpur, Punjab</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-label="Details">
-                            <div class="details-content">
-                                <div class="detail-item availability busy">
-                                    <strong>Status:</strong> <span>Busy</span>
-                                </div>
-                                <div class="detail-item"><strong>Experience:</strong> 8 Years</div>
-                                <div class="detail-item"><strong>Hiring Cost:</strong> ₹350/hr</div>
-                                <div class="detail-item skills">
-                                    <strong>Skills:</strong> 
-                                    <span>Installation</span>
-                                    <span>Maintenance</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-label="Action">
-                            <button class="btn btn-secondary" disabled>Notify Me</button>
-                        </td>
-                    </tr>
-                    <!-- End of Template Row 2 -->
-                </tbody>
-            </table>
+            <div class="provider-card">
+                <div class="profile-section">
+                    <img src="https://i.ibb.co/6yN6MZS/plumber2.jpg" alt="Anil Kumar">
+                    <div class="profile-info">
+                        <h3>Anil Kumar</h3>
+                        <p class="location">Zirakpur, Punjab</p>
+                    </div>
+                </div>
+                <div class="details-section">
+                    <div class="detail-item availability busy"><strong>Status:</strong> <span>Busy</span></div>
+                    <div class="detail-item"><strong>Experience:</strong> 8 Years</div>
+                    <div class="detail-item"><strong>Hiring Cost:</strong> ₹350/hr</div>
+                    <div class="detail-item skills">
+                        <strong>Skills:</strong> 
+                        <div><span>Installation</span><span>Maintenance</span></div>
+                    </div>
+                </div>
+                <div class="action-section">
+                    <button class="btn btn-secondary" disabled>Notify Me</button>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -156,6 +147,16 @@
     <footer>
         <p>© 2025 LocalBizConnect | Empowering Communities</p>
     </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('show-menu');
+        });
+    </script>
 
 </body>
 </html>
