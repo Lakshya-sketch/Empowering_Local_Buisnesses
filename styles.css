@@ -459,7 +459,7 @@ body {
   top: 70px;
   /* height of navbar */
   left: -100%;
-  width: 100%;
+  width: 60%;
   height: calc(100vh - 70px);
   background: #000814;
   display: flex;
@@ -679,6 +679,8 @@ footer {
 
   .hamburger-menu {
     display: flex;
+    max-width: 2vw;
+
   }
 
   .hero-right h1 {
