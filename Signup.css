@@ -46,7 +46,7 @@ body {
     position: absolute;
     height: 100px;
     width: 20px;
-    background-color: rgb(237, 122, 68);
+    background-color: rgb(0, 187, 255);
     border-radius: 10px;
     box-shadow: 0 0 20px 5px rgba(0, 179, 255, 0.7);
 }
@@ -131,7 +131,7 @@ body {
 }
 
 .input-group input {
-    width: 100%;
+    width: 90%;
     padding: 12px 15px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     background-color: rgba(255, 255, 255, 0.1);
