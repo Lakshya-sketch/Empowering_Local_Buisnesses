@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Service - LocalBizConnect</title>
+    <link rel="stylesheet" href="../css/booking.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Stars Background -->
+    <div class="stars">
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+    </div>
+
+    <!-- Header with Navbar -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">LocalBizConnect</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="service-dashboard.html?service=plumber">Services</a></li>
+                <li><a href="Login.html">Login</a></li>
+                <li><a href="Signup.html">Register</a></li>
+            </ul>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="service-dashboard.html?service=plumber">Services</a>
+        <a href="Login.html">Login</a>
+        <a href="Signup.html">Register</a>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <section class="booking-hero">
+            <h1 id="serviceTitle">Book a Service</h1>
+            <p>Fill out the form below to schedule your service appointment</p>
+        </section>
+
+        <!-- Booking Form -->
+        <section class="booking-form-section">
+            <form id="bookingForm" class="booking-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" pattern="[0-9]{10}" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com" />
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Service Address *</label>
+                    <textarea id="address" name="address" rows="3" placeholder="Enter complete address where service is needed" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date">Preferred Date *</label>
+                        <input type="date" id="date" name="date" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Preferred Time *</label>
+                        <input type="time" id="time" name="time" required />
+                    </div>
+                </div>
+
+                               <div class="form-group">
+                    <label for="workDescription">What work needs to be done? *</label>
+                    <textarea id="workDescription" name="workDescription" rows="5" placeholder="Please describe in detail what work you need done (e.g., Fix leaking tap in kitchen, Install new ceiling fan, Repair broken door hinge)" required></textarea>
+                </div>
+
+
+                <div class="submit-group">
+                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                    <p id="confirmationMsg" class="confirmation-msg hidden"></p>
+                </div>
+            </form>
+        </section>
+        <script src="../js/auth-check.js"></script>
+        <script src="../js/booking.js"></script>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 LocalBizConnect | Empowering Communities</p>
+    </footer>

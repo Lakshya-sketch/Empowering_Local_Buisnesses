@@ -1,0 +1,28 @@
+{
+  "serviceName": "plumber",
+  "title": "Our Verified Plumbers",
+  "description": "Browse our list of trusted, verified, and skilled plumbing experts near you.",
+  "endpoint": "/api/services/plumbers",
+  "providers": [
+    {
+      "id": 1,
+      "name": "Raj Sharma",
+      "image": "https://i.ibb.co/wYxXG3C/plumber1.jpg",
+      "location": "Patiala, Punjab",
+      "status": "available",
+      "experience": "10+ Years",
+      "cost": "₹400/hr",
+      "skills": ["Leak Repair", "Pipe Fitting", "Drain Cleaning"]
+    },
+    {
+      "id": 2,
+      "name": "Anil Kumar",
+      "image": "https://i.ibb.co/6yN6MZS/plumber2.jpg",
+      "location": "Zirakpur, Punjab",
+      "status": "busy",
+      "experience": "8 Years",
+      "cost": "₹350/hr",
+      "skills": ["Installation", "Maintenance"]
+    }
+  ]
+}
