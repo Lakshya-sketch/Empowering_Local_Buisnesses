@@ -1,0 +1,48 @@
+{
+  "serviceName": "grocery",
+  "title": "Verified Grocery Stores",
+  "description": "Fresh groceries delivered from trusted local stores near you.",
+  "endpoint": "/api/services/grocery",
+  "providers": [
+    {
+      "id": 1,
+      "name": "Fresh Mart Grocery",
+      "image": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400",
+      "location": "Ludhiana, Model Town",
+      "status": "available",
+      "experience": "15+ Years",
+      "cost": "Free Delivery above ₹500",
+      "skills": ["Fresh Vegetables", "Dairy Products", "Organic Items", "Home Delivery"]
+    },
+    {
+      "id": 2,
+      "name": "Daily Needs Store",
+      "image": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400",
+      "location": "Patiala, Civil Lines",
+      "status": "available",
+      "experience": "10+ Years",
+      "cost": "₹30 Delivery Charge",
+      "skills": ["Groceries", "Snacks", "Beverages", "Quick Delivery"]
+    },
+    {
+      "id": 3,
+      "name": "Green Valley Organics",
+      "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400",
+      "location": "Chandigarh, Sector 17",
+      "status": "busy",
+      "experience": "8 Years",
+      "cost": "Free Delivery above ₹800",
+      "skills": ["Organic Vegetables", "Natural Products", "Farm Fresh", "Premium Quality"]
+    },
+    {
+      "id": 4,
+      "name": "Super Bazar",
+      "image": "https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?w=400",
+      "location": "Jalandhar, City Center",
+      "status": "available",
+      "experience": "20+ Years",
+      "cost": "Free Delivery above ₹300",
+      "skills": ["All Groceries", "Household Items", "Bulk Orders", "Same Day Delivery"]
+    }
+  ]
+}

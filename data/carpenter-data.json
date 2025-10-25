@@ -1,0 +1,28 @@
+{
+  "serviceName": "carpenter",
+  "title": "Our Verified Carpenters",
+  "description": "Find reliable and skilled carpenters for furniture, repairs, and custom work.",
+  "endpoint": "/api/services/carpenters",
+  "providers": [
+    {
+      "id": 1,
+      "name": "Verma Furnitures",
+      "image": "https://i.ibb.co/KzWd5dG/carpenter.jpg",
+      "location": "Panchkula, Sector 20",
+      "status": "available",
+      "experience": "20+ Years",
+      "cost": "₹600/hr",
+      "skills": ["Custom Furniture", "Door Repair", "Polishing"]
+    },
+    {
+      "id": 2,
+      "name": "Modern Woodworks",
+      "image": "https://i.ibb.co/KzWd5dG/carpenter.jpg",
+      "location": "Ambala, Cantt",
+      "status": "busy",
+      "experience": "5 Years",
+      "cost": "₹400/hr",
+      "skills": ["Assembly", "Repairs"]
+    }
+  ]
+}

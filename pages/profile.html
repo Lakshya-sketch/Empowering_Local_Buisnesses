@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile - LocalBizConnect</title>
+    <link rel="stylesheet" href="../css/profile.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Stars Background -->
+    <div class="stars">
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+    </div>
+
+    <!-- Header with Navbar -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">LocalBizConnect</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="service-dashboard.html?service=plumber">Services</a></li>
+                <li><a href="Login.html">Login</a></li>
+                <li><a href="Signup.html">Register</a></li>
+            </ul>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="service-dashboard.html?service=plumber">Services</a>
+        <a href="Login.html">Login</a>
+        <a href="Signup.html">Register</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="profile-container">
+        <section class="profile-hero">
+            <h1>My Profile</h1>
+            <p>Manage your account and bookings</p>
+        </section>
+
+        <section class="profile-content">
+            <!-- User Info Card -->
+            <div class="profile-card">
+                <h2>Account Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Full Name:</strong>
+                        <span id="displayName">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Username:</strong>
+                        <span id="displayUsername">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Email:</strong>
+                        <span id="displayEmail">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Member Since:</strong>
+                        <span id="displayMemberSince">N/A</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookings Card -->
+            <div class="profile-card">
+                <h2>My Bookings</h2>
+                <div id="bookingsList">
+                    <p style="text-align: center; color: #ccc;">Loading bookings...</p>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="profile-actions">
+                <button id="logoutBtn" class="btn btn-danger">Logout</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 LocalBizConnect | Empowering Communities</p>
+    </footer>
+
+    <script src="../js/auth-check.js"></script>
+    <script src="../js/profile.js"></script>
+</body>
+</html>
