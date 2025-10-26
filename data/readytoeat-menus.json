@@ -1,0 +1,104 @@
+{
+  "menus": [
+    {
+      "providerId": 1,
+      "restaurant": "Homely Kitchen",
+      "menu": [
+        {
+          "itemId": 101,
+          "name": "Simple Veg Thali",
+          "desc": "Roti, Rice, Dal, 2 Seasonal Veggies, Salad",
+          "price": 120,
+          "image": "https://img.icons8.com/fluency/96/meal.png"
+        },
+        {
+          "itemId": 102,
+          "name": "Paneer Paratha",
+          "desc": "2 Parathas, Curd & Pickle",
+          "price": 70,
+          "image": "https://img.icons8.com/fluency/96/bread.png"
+        }
+      ]
+    },
+    {
+      "providerId": 2,
+      "restaurant": "Spice Junction",
+      "menu": [
+        {
+          "itemId": 201,
+          "name": "Butter Chicken",
+          "desc": "Served with 2 Naan + Salad",
+          "price": 250,
+          "image": "https://img.icons8.com/emoji/96/meat-on-bone.png"
+        },
+        {
+          "itemId": 202,
+          "name": "Special Tandoori Platter",
+          "desc": "Paneer, Mushroom, Aloo (Tandoor)",
+          "price": 220,
+          "image": "https://img.icons8.com/color/96/grill.png"
+        }
+      ]
+    },
+    {
+      "providerId": 3,
+      "restaurant": "Quick Bites Express",
+      "menu": [
+        {
+          "itemId": 301,
+          "name": "Veg Burger",
+          "desc": "Crispy patty, veggies, sauces",
+          "price": 60,
+          "image": "https://img.icons8.com/fluency/96/hamburger.png"
+        },
+        {
+          "itemId": 302,
+          "name": "Cheese Sandwich",
+          "desc": "Grilled, with cheese dip",
+          "price": 50,
+          "image": "https://img.icons8.com/fluency/96/sandwich.png"
+        }
+      ]
+    },
+    {
+      "providerId": 4,
+      "restaurant": "Tiffin Wala",
+      "menu": [
+        {
+          "itemId": 401,
+          "name": "Non-Veg Thali",
+          "desc": "Chicken curry, 2 Roti, Rice, Salad",
+          "price": 150,
+          "image": "https://img.icons8.com/color/96/chicken.png"
+        },
+        {
+          "itemId": 402,
+          "name": "Dal Makhani Combo",
+          "desc": "Dal Makhani, Jeera Rice, Salad",
+          "price": 110,
+          "image": "https://img.icons8.com/color/96/rice-bowl.png"
+        }
+      ]
+    },
+    {
+      "providerId": 5,
+      "restaurant": "Mom's Kitchen",
+      "menu": [
+        {
+          "itemId": 501,
+          "name": "Traditional Kadhi Chawal",
+          "desc": "Home-style with pakoda",
+          "price": 90,
+          "image": "https://img.icons8.com/fluency/96/soup-plate.png"
+        },
+        {
+          "itemId": 502,
+          "name": "Aloo Paratha",
+          "desc": "With butter and curd",
+          "price": 55,
+          "image": "https://img.icons8.com/fluency/96/bread.png"
+        }
+      ]
+    }
+  ]
+}

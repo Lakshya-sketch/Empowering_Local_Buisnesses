@@ -1,0 +1,44 @@
+{
+  "menus": [
+    {
+      "shopId": 1,
+      "shop": "Daily Grocer",
+      "menu": [
+        {
+          "itemId": 601,
+          "name": "Amul Milk (1L)",
+          "desc": "Fresh Toned",
+          "price": 60,
+          "image": "https://img.icons8.com/color/96/milk-bottle.png"
+        },
+        {
+          "itemId": 602,
+          "name": "Sona Masoori Rice (1kg)",
+          "desc": "Best for daily use",
+          "price": 68,
+          "image": "https://img.icons8.com/color/96/rice-bowl.png"
+        }
+      ]
+    },
+    {
+      "shopId": 2,
+      "shop": "Grocery Mart",
+      "menu": [
+        {
+          "itemId": 701,
+          "name": "Tata Salt (1kg)",
+          "desc": "",
+          "price": 28,
+          "image": "https://img.icons8.com/color/96/salt-shaker.png"
+        },
+        {
+          "itemId": 702,
+          "name": "Aashirvaad Atta (5kg)",
+          "desc": "Whole wheat flour",
+          "price": 295,
+          "image": "https://img.icons8.com/color/96/wheat.png"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "menus": [
+    {
+      "pharmacyId": 1,
+      "pharmacy": "MediPlus Pharmacy",
+      "menu": [
+        {
+          "itemId": 801,
+          "name": "Dolo 650mg",
+          "desc": "15 Tablets | Paracetamol",
+          "price": 32,
+          "image": "https://img.icons8.com/color/96/pill.png"
+        },
+        {
+          "itemId": 802,
+          "name": "Cough Syrup (100ml)",
+          "desc": "Benadryl or equivalent",
+          "price": 95,
+          "image": "https://img.icons8.com/color/96/medicine.png"
+        }
+      ]
+    },
+    {
+      "pharmacyId": 2,
+      "pharmacy": "HealthZone",
+      "menu": [
+        {
+          "itemId": 901,
+          "name": "Vitamin C Chewable Tablets",
+          "desc": "Immunity booster (50-tabs)",
+          "price": 120,
+          "image": "https://img.icons8.com/color/96/tablets.png"
+        },
+        {
+          "itemId": 902,
+          "name": "Otrivin Nasal Spray",
+          "desc": "10ml spray",
+          "price": 85,
+          "image": "https://img.icons8.com/color/96/nasal-spray.png"
+        }
+      ]
+    }
+  ]
+}
