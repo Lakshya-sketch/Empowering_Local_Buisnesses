@@ -1,4 +1,3 @@
-/* --- Basic Setup & Fonts --- */
 body {
     margin: 0;
     padding: 0;
@@ -137,6 +136,19 @@ body {
     font-size: 2.5rem;
     color: #FFD93D;
     margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.profile-hero h1::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50%;
+    height: 3px;
+    background: #FFD93D;
+    border-radius: 2px;
 }
 
 .profile-hero p {
@@ -155,7 +167,12 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 30px;
-    box-shadow: 0 8px 25px rgba(0, 140, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,140,255,0.3);
+    transition: transform 0.3s;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
 }
 
 .profile-card h2 {
@@ -175,6 +192,14 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.5s ease;
+}
+
+.info-item.loaded {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .info-item strong {
@@ -189,13 +214,69 @@ body {
     font-size: 1.1rem;
 }
 
+/* --- Avatar --- */
+.profile-card.account-info {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.profile-card.account-info .profile-avatar {
+    flex: 0 0 120px;
+    position: relative;
+    display: inline-block;
+}
+
+.profile-card.account-info .profile-avatar img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #FFD93D;
+    box-shadow: 0 0 20px #FFD93D60;
+    transition: transform 0.3s;
+}
+
+.profile-card.account-info .profile-avatar:hover img {
+    transform: scale(1.05);
+}
+
+.online-dot {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+    background: #00ff4d;
+    border: 2px solid #FFD93D;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff4d60;
+}
+
+.profile-card.account-info .info-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
 /* Bookings List */
 .booking-item {
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 15px;
+    background: rgba(1, 35, 77, 0.7);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 8px 20px rgba(0,140,255,0.2);
+    transform: translateY(15px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.booking-item.loaded {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .booking-item h3 {
@@ -209,10 +290,21 @@ body {
     font-size: 0.95rem;
 }
 
-/* Profile Actions */
+/* Booking icons */
+.booking-item p::before {
+    content: "📌";
+    margin-right: 8px;
+}
+
+/* Hover effects */
+.booking-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0,140,255,0.45);
+}
+
 .profile-actions {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .btn {
@@ -229,12 +321,14 @@ body {
 .btn-danger {
     background-color: #dc3545;
     color: #fff;
+    padding: 16px 45px;
+    box-shadow: 0 5px 15px rgba(220,53,69,0.2);
 }
 
 .btn-danger:hover {
-    background-color: #c82333;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(220, 53, 69, 0.3);
+    background: linear-gradient(45deg, #ff4d4d, #dc3545);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(220,53,69,0.35);
 }
 
 /* --- Footer --- */
