@@ -1,0 +1,28 @@
+{
+  "serviceName": "electrician",
+  "title": "Our Verified Electricians",
+  "description": "Professional electricians for installations, repairs, and maintenance.",
+  "endpoint": "/api/services/electricians",
+  "providers": [
+    {
+      "id": 1,
+      "name": "Sharma Electric Works",
+      "image": "https://i.ibb.co/6yN6MZS/electrician.jpg",
+      "location": "Ludhiana, Model Town",
+      "status": "available",
+      "experience": "15+ Years",
+      "cost": "₹500/hr",
+      "skills": ["Wiring", "Circuit Repair", "Installation"]
+    },
+    {
+      "id": 2,
+      "name": "Quick Fix Electricals",
+      "image": "https://i.ibb.co/6yN6MZS/electrician.jpg",
+      "location": "Chandigarh, Sector 17",
+      "status": "available",
+      "experience": "8 Years",
+      "cost": "₹400/hr",
+      "skills": ["Home Automation", "LED Installation", "Fan Repair"]
+    }
+  ]
+}

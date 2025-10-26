@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - LocalBizConnect</title>
+    <link rel="stylesheet" href="../css/Login.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Stars Background -->
+    <div class="stars">
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+    </div>
+
+    <!-- Header with Navbar -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">LocalBizConnect</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="service-dashboard.html?service=plumber">Services</a></li>
+                <li><a href="Login.html" class="active">Login</a></li>
+                <li><a href="Signup.html">Register</a></li>
+            </ul>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="service-dashboard.html?service=plumber">Services</a>
+        <a href="Login.html">Login</a>
+        <a href="Signup.html">Register</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="login-container">
+        <div class="login-card">
+            <h1>Welcome Back</h1>
+            <p class="subtitle">Sign in to access your account</p>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe" />
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                
+                <p id="loginError" class="error-msg hidden"></p>
+            </form>
+
+            <div class="signup-link">
+                <p>Don't have an account? <a href="Signup.html">Sign up</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 LocalBizConnect | Empowering Communities</p>
+    </footer>
+
+    <script src="../js/Login.js"></script>
+    <script src="../js/auth-check.js"></script>
+</body>
+</html>
