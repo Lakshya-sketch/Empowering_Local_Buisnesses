@@ -27,21 +27,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
-
 // ===================================================================
 // 📦 NORMAL SERVICE PROVIDERS (BOOKING TYPE)
 // ===================================================================
 async function loadServiceData(serviceName) {
   try {
-    const jsonFile = ../data/${serviceName}-data.json;
+    const jsonFile = `../data/${serviceName}-data.json`;
     const response = await fetch(jsonFile);
 
-    if (!response.ok) throw new Error(Failed to load ${serviceName} data);
+    if (!response.ok) throw new Error(`Failed to load ${serviceName} data`);
 
     const serviceData = await response.json();
     document.getElementById("serviceTitle").textContent = serviceData.title;
     document.getElementById("serviceDescription").textContent = serviceData.description;
-    document.title = ${serviceData.title} - LocalBizConnect;
+    document.title = `${serviceData.title} - LocalBizConnect`;
 
     generateProviderCards(serviceData.providers, serviceData.serviceName);
   } catch (error) {
@@ -57,7 +56,7 @@ function generateProviderCards(providers, serviceName) {
   container.innerHTML = "";
 
   if (!providers || providers.length === 0) {
-    container.innerHTML = <p style="text-align: center; color: #ccc;">No providers available.</p>;
+    container.innerHTML = `<p style="text-align: center; color: #ccc;">No providers available.</p>`;
     return;
   }
 
@@ -75,7 +74,7 @@ function createProviderCard(provider, serviceName) {
   const statusText = provider.status === "available" ? "Available" : "Busy";
   const buttonText = provider.status === "available" ? "Book Now" : "Notify Me";
   const buttonClass = provider.status === "available" ? "btn-primary" : "btn-secondary";
-  const skillsHTML = provider.skills.map((s) => <span>${s}</span>).join("");
+  const skillsHTML = provider.skills.map((s) => `<span>${s}</span>`).join("");
 
   card.innerHTML = `
     <div class="profile-section">
@@ -102,11 +101,6 @@ function createProviderCard(provider, serviceName) {
     </div>`;
   return card;
 }
-
-
-// ===================================================================
-// 🛒 ORDERABLE SHOPS (GROCERY, MEDICINE, READY-TO-EAT)
-// ===================================================================
 async function loadOrderData(category) {
   try {
     const response = await fetch("../data/grocery-menus.json");
@@ -115,7 +109,8 @@ async function loadOrderData(category) {
     const allShops = await response.json();
     const filteredShops = allShops.filter(
       (shop) =>
-        shop.category === category.replace("-", "").replace(" ", "").toLowerCase()
+        (shop.category || "").replace("-", "").replace(" ", "").toLowerCase()
+        === category.replace("-", "").replace(" ", "").toLowerCase()
     );
 
     renderOrderShops(filteredShops, category);
@@ -131,23 +126,21 @@ function renderOrderShops(stores, category) {
   container.innerHTML = "";
 
   if (!stores || stores.length === 0) {
-    container.innerHTML = <p style="text-align:center;color:#ccc;">No ${category} shops available.</p>;
+    container.innerHTML = `<p style="text-align:center;color:#ccc;">No ${category} shops available.</p>`;
     return;
   }
 
   stores.forEach((shop) => {
-    // ✅ FIX for new property names & value casing
     const isAvailable =
-      shop.status.toLowerCase() === "available" || shop.status.toLowerCase() === "open";
+      shop.status && (shop.status.toLowerCase() === "available" || shop.status.toLowerCase() === "open");
     const statusClass = isAvailable ? "available" : "busy";
     const buttonText = isAvailable ? "Order Now" : "Closed";
     const buttonClass = isAvailable ? "btn-primary" : "btn-secondary";
 
-    // ✅ FIX for Specialities/Speciality variations
     const specialities =
       shop.Specialities || shop.Speciality || ["General Store"];
 
-    const skillsHTML = specialities.map((s) => <span>${s}</span>).join("");
+    const skillsHTML = specialities.map((s) => `<span>${s}</span>`).join("");
 
     const card = document.createElement("div");
     card.className = "provider-card";
@@ -189,11 +182,10 @@ function renderOrderShops(stores, category) {
       const id = e.target.dataset.id;
       const cat = e.target.dataset.cat;
       if (!id || !cat) return;
-      window.location.href = order.html?shop=${id}&category=${cat};
+      window.location.href = `order.html?shop=${id}&category=${cat}`;
     });
   });
 }
-
 
 // ===================================================================
 // 🧭 FILTER & ERROR HANDLING
