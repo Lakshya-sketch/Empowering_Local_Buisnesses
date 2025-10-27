@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order - LocalBizConnect</title>
+  <link rel="stylesheet" href="../css/order.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Animated Stars -->
+  <div class="stars">
+    <span class="star"></span><span class="star"></span><span class="star"></span>
+    <span class="star"></span><span class="star"></span><span class="star"></span>
+    <span class="star"></span><span class="star"></span><span class="star"></span>
+    <span class="star"></span><span class="star"></span><span class="star"></span>
+  </div>
+
+  <!-- Header Navbar -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="logo">LocalBizConnect</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="service-dashboard.html?service=plumber">Services</a></li>
+        <li id="loginLink"><a href="Login.html">Login</a></li>
+        <li id="registerLink"><a href="Signup.html">Register</a></li>
+        <li id="profileLink" style="display: none;"><a href="Profile.html">Profile</a></li>
+        <li id="logoutLink" style="display: none;"><a href="#" id="logoutBtn">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Order Page Hero -->
+  <section class="order-hero">
+    <h1 id="storeName">Loading Shop...</h1>
+    <p class="order-subtitle">Select items and add them to your cart</p>
+  </section>
+
+  <!-- Items List -->
+  <main class="order-container">
+    <div id="itemList" class="item-list"></div>
+  </main>
+
+  <!-- Cart Icon -->
+  <button id="cartButton" class="cart-btn">🛒</button>
+
+  <!-- Cart Popup -->
+  <div id="cartPopup" class="cart-popup">
+    <h3>Your Cart</h3>
+    <div id="cartItems"></div>
+    <div id="cartTotal" class="cart-total">Total: ₹0</div>
+    <button id="checkoutBtn" class="checkout-btn">Checkout</button>
+  </div>
+
+  <script src="../js/order.js"></script>
+  <script>
+    // ===================== AUTH CHECK =====================
+    document.addEventListener("DOMContentLoaded", () => {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      const loginLink = document.getElementById("loginLink");
+      const registerLink = document.getElementById("registerLink");
+      const profileLink = document.getElementById("profileLink");
+      const logoutLink = document.getElementById("logoutLink");
+
+      if (isLoggedIn === "true") {
+        // Hide login/register, show profile/logout
+        loginLink.style.display = "none";
+        registerLink.style.display = "none";
+        profileLink.style.display = "inline-block";
+        logoutLink.style.display = "inline-block";
+      } else {
+        profileLink.style.display = "none";
+        logoutLink.style.display = "none";
+      }
+
+      // Logout
+      document.getElementById("logoutBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("currentUserEmail");
+        localStorage.removeItem("currentUserFullName");
+        alert("You have been logged out successfully!");
+        window.location.href = "../index.html";
+      });
+    });
+  </script>
+</body>
+</html>

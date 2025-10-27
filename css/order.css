@@ -1,0 +1,193 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at center, #001122, #000814);
+  color: #fff;
+  margin: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ================== Stars Animation ================== */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+}
+.star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 15px 3px #4da6ff, 0 0 25px 8px #008cff;
+  animation: twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.5); }
+}
+
+/* ================== Navbar ================== */
+.header {
+  background: rgba(1, 35, 77, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.navbar {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  color: #FFD93D;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.nav-links li a:hover {
+  color: #FFD93D;
+}
+
+/* ================== Hero ================== */
+.order-hero {
+  text-align: center;
+  margin: 40px 0 20px;
+}
+.order-hero h1 {
+  color: #FFD93D;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.order-subtitle {
+  color: #ccc;
+  font-size: 1rem;
+}
+
+/* ================== Items ================== */
+.order-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 20px 120px;
+}
+.item-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 15px;
+  transition: 0.3s ease;
+}
+.item-card:hover {
+  border-color: #FFD93D;
+  transform: scale(1.02);
+}
+
+.item-left { display: flex; align-items: center; gap: 15px; }
+.item-card img { width: 60px; height: 60px; border-radius: 10px; }
+.item-info h3 { color: #FFD93D; margin: 0; font-size: 1rem; }
+.item-info p { color: #ccc; margin: 2px 0; font-size: 0.9rem; }
+
+.item-right input {
+  width: 50px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 8px;
+  border: none;
+}
+.item-right button {
+  background: #FFD93D;
+  border: none;
+  padding: 6px 14px;
+  margin-left: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.item-right button:hover {
+  background: #fff;
+  color: #001122;
+}
+
+/* ================== Floating Cart ================== */
+.cart-btn {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #FFD93D;
+  color: #001122;
+  border: none;
+  font-size: 26px;
+  box-shadow: 0 4px 15px rgba(255, 217, 61, 0.4);
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 999;
+}
+.cart-btn:hover { transform: scale(1.08); }
+
+/* ================== Cart Popup ================== */
+.cart-popup {
+  position: fixed;
+  bottom: 90px;
+  left: 25px;
+  width: 300px;
+  background: rgba(0, 8, 20, 0.95);
+  border: 1px solid rgba(255, 217, 61, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 1000;
+}
+.cart-popup h3 {
+  color: #FFD93D;
+  margin-top: 0;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  color: #ccc;
+}
+.cart-total {
+  text-align: right;
+  color: #FFD93D;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.checkout-btn {
+  width: 100%;
+  margin-top: 10px;
+  background: #FFD93D;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  color: #001122;
+  font-weight: 700;
+  cursor: pointer;
+}
+.checkout-btn:hover { background: #fff; }

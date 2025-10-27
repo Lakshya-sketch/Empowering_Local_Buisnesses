@@ -1,0 +1,168 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at center, #001122, #000814);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ================== Stars Background ================== */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 15px 3px #4da6ff, 0 0 25px 8px #008cff;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1);}
+  50% { opacity: 0.3; transform: scale(0.6);}
+}
+
+/* ================== Navbar ================== */
+.header {
+  background: rgba(1, 35, 77, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 6%;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #FFD93D;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #FFD93D;
+}
+
+/* ================== Checkout Section ================== */
+.checkout-container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 25px 30px;
+  box-shadow: 0 5px 30px rgba(255, 217, 61, 0.1);
+}
+
+.checkout-container h1 {
+  text-align: center;
+  color: #FFD93D;
+}
+
+.order-list {
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-total {
+  text-align: right;
+  font-size: 1.2rem;
+  color: #FFD93D;
+  margin-top: 15px;
+}
+
+/* ================== Checkout Form ================== */
+.checkout-details {
+  margin-top: 30px;
+}
+
+.checkout-details h2 {
+  color: #FFD93D;
+  margin-bottom: 15px;
+}
+
+#checkoutForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#checkoutForm input,
+#checkoutForm textarea {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+#checkoutForm textarea {
+  height: 80px;
+}
+
+.place-order-btn {
+  background: #FFD93D;
+  border: none;
+  color: #001122;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.place-order-btn:hover {
+  background: #fff;
+}
+
+/* ================== Footer ================== */
+footer {
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #aaa;
+}
