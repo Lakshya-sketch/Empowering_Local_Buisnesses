@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout - LocalBizConnect</title>
+  <link rel="stylesheet" href="../css/checkout.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Animated Stars Background -->
+  <div class="stars">
+    ${"<span class='star'></span>".repeat(50)}
+  </div>
+
+  <!-- Header Navbar -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="logo">LocalBizConnect</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="service-dashboard.html?service=plumber">Services</a></li>
+        <li id="profileLink" style="display:none;"><a href="Profile.html">Profile</a></li>
+        <li id="logoutLink" style="display:none;"><a href="#" id="logoutBtn">Logout</a></li>
+        <li id="loginLink"><a href="Login.html">Login</a></li>
+        <li id="registerLink"><a href="Signup.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Checkout Container -->
+  <main class="checkout-container">
+    <h1>Checkout Summary</h1>
+    <div id="orderList" class="order-list"></div>
+    <div id="orderTotal" class="order-total">Total: ₹0</div>
+
+    <section class="checkout-details">
+      <h2>Enter Delivery Details</h2>
+      <form id="checkoutForm">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email Address" required />
+        <textarea id="address" placeholder="Delivery Address" required></textarea>
+        <button type="submit" class="place-order-btn">Place Order</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 LocalBizConnect | Empowering Communities</p>
+  </footer>
+
+  <script src="../js/checkout.js"></script>
+</body>
+</html>
