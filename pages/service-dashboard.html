@@ -1,110 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Services - LocalBizConnect</title>
-    <link rel="stylesheet" href="../css/Service-Template.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - LocalBizConnect</title>
+  <link rel="stylesheet" href="../css/service-template.css" />
 </head>
 <body>
-    <!-- Stars Background -->
-    <div class="stars">
-        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
-        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
-        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
-        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
-        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
-    </div>
-
-    <!-- Header with Navbar -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="logo">LocalBizConnect</div>
-            <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="service-dashboard.html?service=plumber" class="active">Services</a></li>
-                <li><a href="Login.html">Login</a></li>
-                <li><a href="Signup.html">Register</a></li>
-            </ul>
-            <div class="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav">
-        <a href="../index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="service-dashboard.html?service=plumber">Services</a>
-        <a href="Login.html">Login</a>
-        <a href="Signup.html">Register</a>
-    </div>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <section class="services-hero">
-            <!-- Service Type Filter -->
-            <div class="service-filter">
-                <a href="?service=plumber" class="filter-link" data-service="plumber">
-                    <div class="filter-card">
-                        <img src="https://img.icons8.com/ios/100/plumbing.png" alt="Plumber">
-                        <span>Plumbers</span>
-                    </div>
-                </a>
-                <a href="?service=electrician" class="filter-link" data-service="electrician">
-                    <div class="filter-card">
-                        <img src="https://img.icons8.com/ios/100/screwdriver.png" alt="Electrician">
-                        <span>Electricians</span>
-                    </div>
-                </a>
-                <a href="?service=carpenter" class="filter-link" data-service="carpenter">
-                    <div class="filter-card">
-                        <img src="https://img.icons8.com/ios/100/hammer.png" alt="Carpenter">
-                        <span>Carpenters</span>
-                    </div>
-                </a>
-                <a href="?service=grocery" class="filter-link" data-service="grocery">
-                    <div class="filter-card">
-                        <img src="https://img.icons8.com/ios/100/shopping-basket-2.png" alt="Grocery">
-                        <span>Grocery</span>
-                    </div>
-                </a>
-                <a href="?service=medicine" class="filter-link" data-service="medicine">
-                    <div class="filter-card">
-                        <img src="https://img.icons8.com/ios/100/pill.png" alt="Medicine">
-                        <span>Medicine</span>
-                    </div>
-                </a>
-                <a href="?service=ready-to-eat" class="filter-link" data-service="ready-to-eat">
-                    <div class="filter-card">
-                        <img src="https://img.icons8.com/dotty/80/food-and-wine.png" alt="Ready to Eat">
-                        <span>Ready-to-Eat</span>
-                    </div>
-                </a>
-            </div>
-
-            <h1 id="serviceTitle">Our Services</h1>
-            <p id="serviceDescription">Browse our list of trusted service providers</p>
-        </section>
-
-        <!-- Provider Listings (Populated by JavaScript) -->
-        <section class="provider-listings" id="providerListings">
-            <p style="text-align: center; color: #FFD93D;">Loading providers...</p>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 LocalBizConnect | Empowering Communities</p>
-    </footer>
-
-    <!-- Load Common JavaScript -->
-    <script src="../js/service-dashboard.js"></script>
-    <script src="../js/auth-check.js"></script>
+  <header class="header">
+    <nav class="navbar">
+      <div class="logo">LocalBizConnect</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="service-dashboard.html?service=plumber">Plumber</a></li>
+        <li><a href="service-dashboard.html?service=electrician">Electrician</a></li>
+        <li><a href="service-dashboard.html?service=readytoeat">Ready to Eat</a></li>
+        <li><a href="service-dashboard.html?service=grocery">Grocery</a></li>
+        <li><a href="service-dashboard.html?service=medicine">Medicine</a></li>
+        <li><a href="Profile.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="main-content">
+    <h1 id="serviceTitle"></h1>
+    <div id="providerList"></div>
+  </main>
+  <footer>
+    <p>&copy; 2025 LocalBizConnect | Empowering Communities</p>
+  </footer>
+  <script src="../js/service-dashboard.js"></script>
 </body>
 </html>

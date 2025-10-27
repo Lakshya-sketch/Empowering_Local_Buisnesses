@@ -1,169 +1,74 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Get service type from URL parameter
-    const params = new URLSearchParams(window.location.search);
-    const service = params.get("service") || "plumber";
+  const params = new URLSearchParams(window.location.search);
+  const service = params.get("service");
+  const id = params.get("id");
+  const panel = document.getElementById("bookingPanel");
+  if (!service) {
+    panel.innerHTML = "<p>Select a service or item to continue.</p>";
+    return;
+  }
+  
+  if (service === "plumber" || service === "electrician") {
+    // Provider booking form
+    panel.innerHTML = `
+      <h2>Book a ${service.charAt(0).toUpperCase() + service.slice(1)} Provider</h2>
+      <form id="bookingForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <input type="text" id="address" placeholder="Your Address" required>
+        <input type="date" id="date" required>
+        <input type="time" id="time" required>
+        <textarea id="workDescription" placeholder="Work Required" required></textarea>
+        <button type="submit">Submit Booking</button>
+      </form>
+    `;
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      // Save booking in localStorage
+      let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+      bookings.push({
+        service,
+        providerId: id,
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        address: document.getElementById("address").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        description: document.getElementById("workDescription").value,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+      alert("Booking successful!");
+      this.reset();
+    });
+  } else {
+    // Item Orders: Just show current cart/order basket
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    if (orders.length === 0) {
+      panel.innerHTML = `<p>Your order basket is empty!</p>`;
+      return;
+    }
+    let total = 0;
+    let html = "<h2>Review Your Order</h2>";
+    html += '<ul style="list-style:none;padding:0;">';
+    orders.forEach(item => {
+      total += item.price;
+      html += `
+        <li style="margin:8px 0;">
+          <img src="${item.image}" style="width:35px;vertical-align:middle;"> 
+          <strong>${item.name}</strong> from ${item.shop || item.serviceType} - ₹${item.price}
+        </li>`;
+    });
+    html += "</ul>";
+    html += `<p><strong>Total:</strong> ₹${total}</p>`;
+    html += `<button id="confirmOrderBtn">Place Order</button>`;
+    panel.innerHTML = html;
     
-    // Update page title based on service
-    const titleElement = document.getElementById("serviceTitle");
-    titleElement.textContent = `Book a ${capitalize(service)} Service`;
-
-    // ========== AUTO-FILL USER DATA FROM PROFILE ==========
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    const currentUserFullName = localStorage.getItem('currentUserFullName');
-    const currentUserEmail = localStorage.getItem('currentUserEmail');
-
-    console.log('Auth Check:', { isLoggedIn, currentUserFullName, currentUserEmail });
-
-    if (isLoggedIn === 'true') {
-        // Pre-fill name and email from profile
-        if (currentUserFullName) {
-            const nameField = document.getElementById("name");
-            nameField.value = currentUserFullName;
-            nameField.readOnly = true;
-            nameField.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
-            nameField.style.cursor = 'not-allowed';
-        }
-        if (currentUserEmail) {
-            const emailField = document.getElementById("email");
-            emailField.value = currentUserEmail;
-            emailField.readOnly = true;
-            emailField.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
-            emailField.style.cursor = 'not-allowed';
-        }
-    } else {
-        // If not logged in, redirect to login
-        alert("Please login to book a service");
-        window.location.href = 'Login.html';
-        return;
-    }
-    // ========== END AUTO-FILL ==========
-
-    // Set minimum date to today
-    const dateInput = document.getElementById("date");
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.setAttribute('min', today);
-
-    // Hamburger menu functionality
-    const hamburger = document.querySelector('.hamburger-menu');
-    const mobileNav = document.querySelector('.mobile-nav');
-
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            mobileNav.classList.toggle('show-menu');
-        });
-    }
-
-    // Close mobile menu when clicking on a link
-    const mobileLinks = document.querySelectorAll('.mobile-nav a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            mobileNav.classList.remove('show-menu');
-        });
+    document.getElementById("confirmOrderBtn").addEventListener("click", () => {
+      localStorage.setItem("lastOrder", JSON.stringify(orders));
+      localStorage.removeItem("orders");
+      alert("Order placed! Thank you.");
+      panel.innerHTML = "<p>Your order is confirmed! You can view it in Profile.</p>";
     });
-
-    // Form submission handler
-    document.getElementById("bookingForm").addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        // Get form values
-        const name = document.getElementById("name").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const address = document.getElementById("address").value.trim();
-        const date = document.getElementById("date").value;
-        const time = document.getElementById("time").value;
-        const workDescription = document.getElementById("workDescription").value.trim();
-
-        // Validation
-        if (!name || !phone || !address || !date || !time || !workDescription) {
-            alert("Please fill all required fields!");
-            return;
-        }
-
-        // Phone number validation (10 digits)
-        const phonePattern = /^[0-9]{10}$/;
-        if (!phonePattern.test(phone)) {
-            alert("Please enter a valid 10-digit phone number!");
-            return;
-        }
-
-        // Create booking object
-        const bookingData = {
-            name,
-            phone,
-            email,
-            address,
-            date,
-            time,
-            serviceType: service,
-            workDescription,
-            bookingId: generateBookingId(),
-            timestamp: new Date().toISOString(),
-            username: localStorage.getItem('currentUser')
-        };
-
-        // Get existing bookings from localStorage
-        let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-        
-        // Add new booking
-        bookings.push(bookingData);
-        
-        // Save to localStorage
-        localStorage.setItem("bookings", JSON.stringify(bookings));
-        localStorage.setItem("latestBooking", JSON.stringify(bookingData));
-
-        // Show confirmation message
-        const confirmation = document.getElementById("confirmationMsg");
-        confirmation.innerHTML = `
-            <strong>Booking Confirmed!</strong><br>
-            Booking ID: ${bookingData.bookingId}<br>
-            Your ${capitalize(service)} service is scheduled for ${formatDate(date)} at ${formatTime(time)}.
-        `;
-        confirmation.classList.remove("hidden");
-
-        // Reset only the editable fields
-        document.getElementById("phone").value = '';
-        document.getElementById("address").value = '';
-        document.getElementById("date").value = '';
-        document.getElementById("time").value = '';
-        document.getElementById("workDescription").value = '';
-
-        // Scroll to confirmation message
-        confirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-        // Hide confirmation after 10 seconds
-        setTimeout(() => {
-            confirmation.classList.add("hidden");
-        }, 10000);
-    });
-
-    // Helper function to capitalize first letter
-    function capitalize(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-
-    // Generate unique booking ID
-    function generateBookingId() {
-        const prefix = "LBC";
-        const timestamp = Date.now().toString().slice(-6);
-        const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-        return `${prefix}${timestamp}${random}`;
-    }
-
-    // Format date for display
-    function formatDate(dateString) {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString('en-IN', options);
-    }
-
-    // Format time for display
-    function formatTime(timeString) {
-        const [hours, minutes] = timeString.split(':');
-        const hour = parseInt(hours);
-        const ampm = hour >= 12 ? 'PM' : 'AM';
-        const displayHour = hour % 12 || 12;
-        return `${displayHour}:${minutes} ${ampm}`;
-    }
+  }
 });
