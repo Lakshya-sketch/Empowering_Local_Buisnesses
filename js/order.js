@@ -22,27 +22,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  // Load shop details from MySQL
   try {
-    const shopRes = await fetch(`${API_URL}/providers/${shopId}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    
-    if (!shopRes.ok) {
-      throw new Error('Shop not found');
+    const res = await fetch("../data/grocery-menus.json");
+    const data = await res.json();
+    const shop = data.find((s) => s.id === shopId);
+    if (!shop) {
+      storeName.textContent = "Shop not found.";
+      return;
     }
-    
-    const shop = await shopRes.json();
-    storeName.textContent = `Order from ${shop.name}`;
 
-    // Load services/products for this shop
-    const servicesRes = await fetch(`${API_URL}/services?provider_id=${shopId}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    
-    const services = await servicesRes.json();
-    renderItems(services);
-    
+    storeName.textContent = `Order from ${shop.name}`;
+    renderItems(shop.menu);
   } catch (err) {
     console.error("Error loading shop:", err);
     storeName.textContent = "Shop not found.";

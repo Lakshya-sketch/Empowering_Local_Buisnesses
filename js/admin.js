@@ -224,18 +224,24 @@ function handleFormSubmit(e) {
     
     const formData = new FormData(e.target);
     
+    // Get cost value and ensure it's a number
+    const costValue = formData.get('cost');
+    const hourlyRate = costValue ? parseFloat(costValue.toString().replace(/[^0-9.]/g, '')) : 0;
+    
     const providerData = {
         name: formData.get('name'),
         email: formData.get('email') || null,
         phone: formData.get('phone') || null,
         category_id: categoryMap[currentSection],
         business_address: formData.get('location') || null,
-        hourly_rate: parseFloat(formData.get('cost')) || 0,
+        hourly_rate: hourlyRate,  // This should now work
         experience: formData.get('experience') || null,
         profile_image: formData.get('image') || null,
-        status: formData.get('status') || 'active',
+        status: formData.get('status') || 'available',
         description: formData.get('skills') || null
     };
+
+    console.log('Submitting provider data:', providerData); // Debug log
 
     if (editingId) {
         updateProvider(editingId, providerData);
@@ -243,6 +249,7 @@ function handleFormSubmit(e) {
         addProvider(providerData);
     }
 }
+
 
 // Add provider
 async function addProvider(providerData) {

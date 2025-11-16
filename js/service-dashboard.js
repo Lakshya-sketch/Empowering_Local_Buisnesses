@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   updateActiveFilter(selectedService);
 
-  // Mobile menu
+  // ===== hamburger toggle =====
   const hamburger = document.querySelector(".hamburger-menu");
   const mobileNav = document.querySelector(".mobile-nav");
   
@@ -44,31 +44,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // ===================================================================
-// 📦 NORMAL SERVICE PROVIDERS (FROM MYSQL)
+// 📦 NORMAL SERVICE PROVIDERS (BOOKING TYPE)
 // ===================================================================
 async function loadServiceData(serviceName) {
   try {
-    const categoryId = CATEGORY_MAP[serviceName.toLowerCase()];
-    
-    if (!categoryId) {
-      throw new Error('Invalid service category');
-    }
+    const jsonFile = `../data/${serviceName}-data.json`;
+    const response = await fetch(jsonFile);
 
-    // Fetch from MySQL API
-    const response = await fetch(`${API_URL}/providers?category_id=${categoryId}`);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    const providers = await response.json();
-    
-    // Update page title
-    document.getElementById("serviceTitle").textContent = 
-      `${serviceName.charAt(0).toUpperCase() + serviceName.slice(1)} Services`;
-    document.getElementById("serviceDescription").textContent = 
-      `Find trusted ${serviceName} providers in your area`;
-    document.title = `${serviceName} Services - LocalBizConnect`;
+    if (!response.ok) throw new Error(`Failed to load ${serviceName} data`);
+
+    const serviceData = await response.json();
+    document.getElementById("serviceTitle").textContent = serviceData.title;
+    document.getElementById("serviceDescription").textContent = serviceData.description;
+    document.title = `${serviceData.title} - LocalBizConnect`;
 
     generateProviderCards(providers, serviceName);
     
@@ -148,47 +136,19 @@ function createProviderCard(provider, serviceName) {
   
   return card;
 }
-
-function bookProvider(providerId, serviceName) {
-  const token = localStorage.getItem('authToken');
-  
-  if (!token) {
-    alert('Please login to book a service');
-    window.location.href = 'Login.html';
-    return;
-  }
-  
-  window.location.href = `Booking.html?provider=${providerId}&service=${serviceName}`;
-}
-
-// ===================================================================
-// 🛒 ORDERABLE SHOPS (FROM MYSQL)
-// ===================================================================
 async function loadOrderData(category) {
   try {
-    const categoryId = CATEGORY_MAP[category.toLowerCase().replace('-', '')];
-    
-    if (!categoryId) {
-      throw new Error('Invalid category');
-    }
+    const response = await fetch("../data/grocery-menus.json");
+    if (!response.ok) throw new Error("Failed to load shop data");
 
-    // Fetch shops from MySQL API
-    const response = await fetch(`${API_URL}/providers?category_id=${categoryId}`);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    const shops = await response.json();
-    
-    // Update page title
-    document.getElementById("serviceTitle").textContent = 
-      `${category.charAt(0).toUpperCase() + category.slice(1)} Stores`;
-    document.getElementById("serviceDescription").textContent = 
-      `Order from local ${category} providers`;
+    const allShops = await response.json();
+    const filteredShops = allShops.filter(
+      (shop) =>
+        (shop.category || "").replace("-", "").replace(" ", "").toLowerCase()
+        === category.replace("-", "").replace(" ", "").toLowerCase()
+    );
 
-    renderOrderShops(shops, category);
-    
+    renderOrderShops(filteredShops, category);
   } catch (error) {
     console.error("Error in loadOrderData:", error);
     showErrorMessage(category);
@@ -210,16 +170,16 @@ function renderOrderShops(stores, category) {
   }
 
   stores.forEach((shop) => {
-    const isAvailable = shop.status === 'active';
+    const isAvailable =
+      shop.status && (shop.status.toLowerCase() === "available" || shop.status.toLowerCase() === "open");
     const statusClass = isAvailable ? "available" : "busy";
     const buttonText = isAvailable ? "Order Now" : "Closed";
     const buttonClass = isAvailable ? "btn-primary" : "btn-secondary";
 
-    // Extract specialities from description
-    const specialities = shop.description ? 
-      shop.description.split(',').slice(0, 3) : 
-      ['General Store'];
-    const skillsHTML = specialities.map((s) => `<span>${s.trim()}</span>`).join("");
+    const specialities =
+      shop.Specialities || shop.Speciality || ["General Store"];
+
+    const skillsHTML = specialities.map((s) => `<span>${s}</span>`).join("");
 
     const card = document.createElement("div");
     card.className = "provider-card";
@@ -255,18 +215,15 @@ function renderOrderShops(stores, category) {
 
     container.appendChild(card);
   });
-}
 
-function orderFromShop(shopId, category) {
-  const token = localStorage.getItem('authToken');
-  
-  if (!token) {
-    alert('Please login to place an order');
-    window.location.href = 'Login.html';
-    return;
-  }
-  
-  window.location.href = `order.html?shop=${shopId}&category=${category}`;
+  document.querySelectorAll(".btn.btn-primary").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const id = e.target.dataset.id;
+      const cat = e.target.dataset.cat;
+      if (!id || !cat) return;
+      window.location.href = `order.html?shop=${id}&category=${cat}`;
+    });
+  });
 }
 
 // ===================================================================
