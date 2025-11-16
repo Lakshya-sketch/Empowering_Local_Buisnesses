@@ -104,22 +104,48 @@
   </div>
 
   <main>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="slideshow">
-            <div class="slide-track">
-                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800" alt="Services">
-                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800" alt="Plumbing">
-                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800" alt="Electrical">
-                <img src="https://images.unsplash.com/photo-1615986201152-7686a4867f30?w=800" alt="Carpentry">
-                <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800" alt="Grocery">
-                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800" alt="Services">
-                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800" alt="Plumbing">
+    <!-- Giant Slideshow Hero Section -->
+    <section class="giant-slideshow-hero">
+        <div class="slideshow-wrapper">
+            <div class="slide-item fade">
+                <img src="images/Support Local Businesses.webp" alt="Support Local Businesses">
             </div>
-        </div>
-        <div class="hero-right">
-            <h1>Welcome to LocalBizConnect</h1>
-            <p>Connecting you with trusted local service providers in your community</p>
+            <div class="slide-item fade">
+                <img src="images/1607611402-GettyImages-1223488572.jpg" alt="Professional Services">
+            </div>
+            <div class="slide-item fade">
+                <img src="images/3-Possible-Careers-after-Plumbing-School.jpg" alt="Plumbing Services">
+            </div>
+            <div class="slide-item fade">
+                <img src="images/3-Possible-Careers-after-Plumbing-School copy.jpg" alt="Expert Plumbers">
+            </div>
+            <div class="slide-item fade">
+                <img src="images/tim-mossholder-qvWnGmoTbik-unsplash.jpg" alt="Community Connection">
+            </div>
+            <div class="slide-item fade">
+                <img src="images/download.jpg" alt="Local Business Support">
+            </div>
+
+            <!-- Navigation Buttons -->
+            <button class="prev-button" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next-button" onclick="changeSlide(1)">&#10095;</button>
+
+            <!-- Dots Navigation -->
+            <div class="dots-navigation">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+                <span class="dot" onclick="currentSlide(6)"></span>
+            </div>
+
+            <!-- Hero Overlay -->
+            <div class="slideshow-overlay">
+                <h1>Welcome to LocalBizConnect</h1>
+                <p>Connecting you with trusted local service providers</p>
+                <button class="cta-button-hero" onclick="document.querySelector('.categories').scrollIntoView({behavior: 'smooth'})">Explore Services</button>
+            </div>
         </div>
     </section>
 
@@ -197,5 +223,56 @@
 
     <script src="js/main.js"></script>
     <script src="js/auth-check.js"></script> <!-- For index.html -->
+
+    <script>
+        let slideIndex = 1;
+
+        function changeSlide(n) {
+            showSlide(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+        }
+
+        function showSlide(n) {
+            const slides = document.getElementsByClassName("slide-item");
+            const dots = document.getElementsByClassName("dot");
+
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].style.backgroundColor = "#FFD93D";
+        }
+
+        function autoSlide() {
+            let nextSlide = slideIndex + 1;
+            const slides = document.getElementsByClassName("slide-item");
+
+            if (nextSlide > slides.length) {
+                nextSlide = 1;
+            }
+
+            showSlide(slideIndex = nextSlide);
+            setTimeout(autoSlide, 5000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(slideIndex);
+            autoSlide();
+        });
+    </script>
 </body>
 </html>
