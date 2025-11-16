@@ -75,6 +75,11 @@ function loadUserProfile() {
             day: 'numeric'
         });
     }
+
+    // Fade-in animation for info items
+    document.querySelectorAll('.info-item').forEach((item, i) => {
+        setTimeout(() => item.classList.add('loaded'), 150 * i);
+    });
 }
 
 function loadUserBookings() {
@@ -82,7 +87,9 @@ function loadUserBookings() {
     const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
     const bookingsList = document.getElementById('bookingsList');
 
-    // Filter bookings for current user only
+    if (!bookingsList) return;
+
+    // Filter bookings for current user
     const userBookings = bookings.filter(b => b.username === currentUser);
 
     if (userBookings.length === 0) {
@@ -92,18 +99,25 @@ function loadUserBookings() {
 
     bookingsList.innerHTML = '';
 
-    userBookings.reverse().forEach(booking => {
+    // Display bookings
+    userBookings.reverse().forEach((booking, index) => {
         const bookingItem = document.createElement('div');
         bookingItem.className = 'booking-item';
         bookingItem.innerHTML = `
-            <h3>${capitalize(booking.serviceType)} Service</h3>
-            <p><strong>Booking ID:</strong> ${booking.bookingId}</p>
-            <p><strong>Date & Time:</strong> ${formatDate(booking.date)} at ${formatTime(booking.time)}</p>
-            <p><strong>Address:</strong> ${booking.address}</p>
-            <p><strong>Phone:</strong> ${booking.phone}</p>
-            <p><strong>Work Description:</strong> ${booking.workDescription || booking.description || 'N/A'}</p>
+            <div class="booking-icon">📅</div>
+            <div class="booking-info">
+                <h3>${capitalize(booking.serviceType || 'Service')}</h3>
+                <p><strong>Booking ID:</strong> ${booking.bookingId}</p>
+                <p><strong>Date & Time:</strong> ${formatDate(booking.date)} at ${formatTime(booking.time)}</p>
+                <p><strong>Address:</strong> ${booking.address}</p>
+                <p><strong>Phone:</strong> ${booking.phone}</p>
+                <p><strong>Work Description:</strong> ${booking.workDescription || booking.description || 'N/A'}</p>
+            </div>
         `;
         bookingsList.appendChild(bookingItem);
+
+        // Animate appearance (fade-in)
+        setTimeout(() => bookingItem.classList.add('loaded'), 150 * index);
     });
 }
 
@@ -123,11 +137,13 @@ function capitalize(str) {
 }
 
 function formatDate(dateString) {
+    if (!dateString) return 'N/A';
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-IN', options);
 }
 
 function formatTime(timeString) {
+    if (!timeString) return 'N/A';
     const [hours, minutes] = timeString.split(':');
     const hour = parseInt(hours);
     const ampm = hour >= 12 ? 'PM' : 'AM';
