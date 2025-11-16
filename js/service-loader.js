@@ -1,3 +1,6 @@
+const API_URL = 'http://localhost:5500/api';
+
+
 document.addEventListener("DOMContentLoaded", async () => {
     const currentPage = window.location.pathname.split('/').pop();
     let dataFile = '';

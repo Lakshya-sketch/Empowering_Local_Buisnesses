@@ -1,3 +1,5 @@
+const API_URL = 'http://localhost:5500/api';
+
 document.addEventListener("DOMContentLoaded", () => {
     // Check if user is logged in
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -10,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Load user data
     loadUserProfile();
     loadUserBookings();
+    checkAdminAccess();
 
     // Hamburger menu
     const hamburger = document.querySelector('.hamburger-menu');
@@ -37,9 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.removeItem('currentUserEmail');
             localStorage.removeItem('currentUserFullName');
             localStorage.removeItem('rememberMe');
+            localStorage.removeItem('userRole');
             window.location.href = '../index.html';
         }
     });
+
+    // Admin panel button
+    const adminPanelBtn = document.getElementById('adminPanelBtn');
+    if (adminPanelBtn) {
+        adminPanelBtn.addEventListener('click', () => {
+            window.location.href = '../pages/admin.html';
+        });
+    }
 });
 
 function loadUserProfile() {
@@ -93,6 +105,17 @@ function loadUserBookings() {
         `;
         bookingsList.appendChild(bookingItem);
     });
+}
+
+function checkAdminAccess() {
+    const userRole = localStorage.getItem('userRole');
+    const isAdmin = userRole === 'admin';
+    
+    // Show admin panel section only if user is admin
+    const adminPanelSection = document.getElementById('adminPanelSection');
+    if (adminPanelSection) {
+        adminPanelSection.style.display = isAdmin ? 'block' : 'none';
+    }
 }
 
 function capitalize(str) {

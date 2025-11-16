@@ -1,3 +1,5 @@
+const API_URL = 'http://localhost:5500/api';
+
 document.addEventListener("DOMContentLoaded", () => {
   const orderList = document.getElementById("orderList");
   const orderTotal = document.getElementById("orderTotal");

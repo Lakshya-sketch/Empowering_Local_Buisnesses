@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - LocalBizConnect</title>
+    <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars">
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+    </div>
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo"><a href="../index.html">LocalBizConnect Admin</a></div>
+            <div class="nav-right">
+                <div class="user-profile">
+                    <span id="adminName">Admin</span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-menu">
+                <button class="menu-item active" data-section="overview">
+                    <span class="icon">📊</span>
+                    <span>Overview</span>
+                </button>
+                <button class="menu-item" data-section="plumber">
+                    <span class="icon">🔧</span>
+                    <span>Plumbers</span>
+                </button>
+                <button class="menu-item" data-section="electrician">
+                    <span class="icon">⚡</span>
+                    <span>Electricians</span>
+                </button>
+                <button class="menu-item" data-section="carpenter">
+                    <span class="icon">🪚</span>
+                    <span>Carpenters</span>
+                </button>
+                <button class="menu-item" data-section="grocery">
+                    <span class="icon">🛒</span>
+                    <span>Grocery</span>
+                </button>
+                <button class="menu-item" data-section="medicine">
+                    <span class="icon">💊</span>
+                    <span>Medicine</span>
+                </button>
+                <button class="menu-item" data-section="ready-to-eat">
+                    <span class="icon">🍜</span>
+                    <span>Ready-to-Eat</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="section active">
+                <div class="section-header">
+                    <h1>Dashboard Overview</h1>
+                </div>
+                <div class="overview-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalProviders">0</div>
+                        <div class="stat-label">Total Providers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalProducts">0</div>
+                        <div class="stat-label">Total Products</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalServices">0</div>
+                        <div class="stat-label">Total Services</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalCategories">6</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                </div>
+
+                <div class="overview-content">
+                    <h2>All Services & Products Overview</h2>
+                    <div id="overviewList" class="overview-list"></div>
+                </div>
+            </section>
+
+            <!-- Service Sections -->
+            <section id="plumber" class="section">
+                <div class="section-header">
+                    <h1>Plumbers Management</h1>
+                    <button class="add-btn" onclick="openAddModal('plumber')">+ Add Plumber</button>
+                </div>
+                <div class="providers-grid" id="plumberGrid"></div>
+            </section>
+
+            <section id="electrician" class="section">
+                <div class="section-header">
+                    <h1>Electricians Management</h1>
+                    <button class="add-btn" onclick="openAddModal('electrician')">+ Add Electrician</button>
+                </div>
+                <div class="providers-grid" id="electricianGrid"></div>
+            </section>
+
+            <section id="carpenter" class="section">
+                <div class="section-header">
+                    <h1>Carpenters Management</h1>
+                    <button class="add-btn" onclick="openAddModal('carpenter')">+ Add Carpenter</button>
+                </div>
+                <div class="providers-grid" id="carpenterGrid"></div>
+            </section>
+
+            <section id="grocery" class="section">
+                <div class="section-header">
+                    <h1>Grocery Shops Management</h1>
+                    <button class="add-btn" onclick="openAddModal('grocery')">+ Add Grocery Shop</button>
+                </div>
+                <div class="providers-grid" id="groceryGrid"></div>
+            </section>
+
+            <section id="medicine" class="section">
+                <div class="section-header">
+                    <h1>Pharmacies Management</h1>
+                    <button class="add-btn" onclick="openAddModal('medicine')">+ Add Pharmacy</button>
+                </div>
+                <div class="providers-grid" id="medicineGrid"></div>
+            </section>
+
+            <section id="ready-to-eat" class="section">
+                <div class="section-header">
+                    <h1>Ready-to-Eat Shops Management</h1>
+                    <button class="add-btn" onclick="openAddModal('ready-to-eat')">+ Add Shop</button>
+                </div>
+                <div class="providers-grid" id="ready-to-eatGrid"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Provider</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="providerForm" class="provider-form">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="location">Location *</label>
+                        <input type="text" id="location" name="location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status *</label>
+                        <select id="status" name="status" required>
+                            <option value="available">Available</option>
+                            <option value="busy">Busy</option>
+                            <option value="offline">Offline</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="experience">Experience *</label>
+                        <input type="text" id="experience" name="experience" placeholder="e.g., 10+ Years" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cost">Cost/Rate *</label>
+                        <input type="text" id="cost" name="cost" placeholder="e.g., ₹400/hr" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Image URL *</label>
+                    <input type="url" id="image" name="image" placeholder="https://..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Skills (comma-separated) *</label>
+                    <textarea id="skills" name="skills" placeholder="e.g., Leak Repair, Pipe Fitting" required></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="submit-btn">Save Provider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2>Confirm Delete</h2>
+            </div>
+            <p>Are you sure you want to delete this provider? This action cannot be undone.</p>
+            <div class="form-actions">
+                <button class="cancel-btn" onclick="closeDeleteModal()">Cancel</button>
+                <button class="delete-btn" onclick="confirmDelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 LocalBizConnect Admin Dashboard | Empowering Communities</p>
+    </footer>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>

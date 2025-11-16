@@ -1,7 +1,21 @@
+const API_URL = 'http://localhost:5500/api';
+
+// Category ID mapping
+const CATEGORY_MAP = {
+  'plumber': 1,
+  'electrician': 2,
+  'carpenter': 3,
+  'grocery': 4,
+  'medicine': 5,
+  'readytoeat': 6,
+  'ready-to-eat': 6
+};
+
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const selectedService = params.get("service") || "plumber";
 
+  // Load data based on service type
   if (["grocery", "medicine", "readytoeat", "ready-to-eat"].includes(selectedService.toLowerCase())) {
     await loadOrderData(selectedService);
   } else {
@@ -10,39 +24,54 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   updateActiveFilter(selectedService);
 
+  // Mobile menu
   const hamburger = document.querySelector(".hamburger-menu");
   const mobileNav = document.querySelector(".mobile-nav");
+  
   if (hamburger) {
     hamburger.addEventListener("click", () => {
       hamburger.classList.toggle("active");
       mobileNav.classList.toggle("show-menu");
     });
   }
+  
   document.querySelectorAll(".mobile-nav a").forEach((link) => {
     link.addEventListener("click", () => {
       hamburger.classList.remove("active");
-      mobileNav.classList.remove("show-menu");
+      mobileNav.classList.remove("active");
     });
   });
 });
 
-
 // ===================================================================
-// 📦 NORMAL SERVICE PROVIDERS (BOOKING TYPE)
+// 📦 NORMAL SERVICE PROVIDERS (FROM MYSQL)
 // ===================================================================
 async function loadServiceData(serviceName) {
   try {
-    const jsonFile = `../data/${serviceName}-data.json`;
-    const response = await fetch(jsonFile);
+    const categoryId = CATEGORY_MAP[serviceName.toLowerCase()];
+    
+    if (!categoryId) {
+      throw new Error('Invalid service category');
+    }
 
-    if (!response.ok) throw new Error(`Failed to load ${serviceName} data`);
+    // Fetch from MySQL API
+    const response = await fetch(`${API_URL}/providers?category_id=${categoryId}`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const providers = await response.json();
+    
+    // Update page title
+    document.getElementById("serviceTitle").textContent = 
+      `${serviceName.charAt(0).toUpperCase() + serviceName.slice(1)} Services`;
+    document.getElementById("serviceDescription").textContent = 
+      `Find trusted ${serviceName} providers in your area`;
+    document.title = `${serviceName} Services - LocalBizConnect`;
 
-    const serviceData = await response.json();
-    document.getElementById("serviceTitle").textContent = serviceData.title;
-    document.getElementById("serviceDescription").textContent = serviceData.description;
-    document.title = `${serviceData.title} - LocalBizConnect`;
-
-    generateProviderCards(serviceData.providers, serviceData.serviceName);
+    generateProviderCards(providers, serviceName);
+    
   } catch (error) {
     console.error("Error loading service data:", error);
     showErrorMessage(serviceName);
@@ -56,7 +85,10 @@ function generateProviderCards(providers, serviceName) {
   container.innerHTML = "";
 
   if (!providers || providers.length === 0) {
-    container.innerHTML = `<p style="text-align: center; color: #ccc;">No providers available.</p>`;
+    container.innerHTML = `
+      <p style="text-align: center; color: #ccc; padding: 40px;">
+        No providers available at this time.
+      </p>`;
     return;
   }
 
@@ -70,54 +102,93 @@ function createProviderCard(provider, serviceName) {
   const card = document.createElement("div");
   card.className = "provider-card";
 
-  const statusClass = provider.status === "available" ? "available" : "busy";
-  const statusText = provider.status === "available" ? "Available" : "Busy";
-  const buttonText = provider.status === "available" ? "Book Now" : "Notify Me";
-  const buttonClass = provider.status === "available" ? "btn-primary" : "btn-secondary";
-  const skillsHTML = provider.skills.map((s) => `<span>${s}</span>`).join("");
+  // Map database status to UI status
+  const isAvailable = provider.status === 'active';
+  const statusClass = isAvailable ? "available" : "busy";
+  const statusText = isAvailable ? "Available" : "Busy";
+  const buttonText = isAvailable ? "Book Now" : "Notify Me";
+  const buttonClass = isAvailable ? "btn-primary" : "btn-secondary";
+  
+  // Extract skills from description (if available)
+  const skills = provider.description ? 
+    provider.description.split(',').slice(0, 3) : 
+    ['Service Provider'];
+  const skillsHTML = skills.map((s) => `<span>${s.trim()}</span>`).join("");
 
   card.innerHTML = `
     <div class="profile-section">
-      <img src="${provider.image}" alt="${provider.name}">
+      <img src="${provider.profile_image || 'https://via.placeholder.com/100'}" 
+           alt="${provider.name}">
       <div class="profile-info">
         <h3>${provider.name}</h3>
-        <p class="location">${provider.location}</p>
+        <p class="location">${provider.business_address || 'Location not specified'}</p>
       </div>
     </div>
     <div class="details-section">
       <div class="detail-item availability ${statusClass}">
         <strong>Status:</strong> <span>${statusText}</span>
       </div>
-      <div class="detail-item"><strong>Experience:</strong> ${provider.experience}</div>
-      <div class="detail-item"><strong>Hiring Cost:</strong> ${provider.cost}</div>
+      <div class="detail-item">
+        <strong>Experience:</strong> ${provider.experience || 'N/A'}
+      </div>
+      <div class="detail-item">
+        <strong>Hiring Cost:</strong> ₹${provider.hourly_rate || 'N/A'}/hr
+      </div>
       <div class="detail-item skills">
         <strong>Skills:</strong><div>${skillsHTML}</div>
       </div>
     </div>
     <div class="action-section">
-      <a href="Booking.html?service=${serviceName}">
-        <button class="btn ${buttonClass}">${buttonText}</button>
-      </a>
+      <button class="btn ${buttonClass}" 
+              onclick="bookProvider(${provider.id}, '${serviceName}')"
+              ${!isAvailable ? 'disabled' : ''}>
+        ${buttonText}
+      </button>
     </div>`;
+  
   return card;
 }
 
+function bookProvider(providerId, serviceName) {
+  const token = localStorage.getItem('authToken');
+  
+  if (!token) {
+    alert('Please login to book a service');
+    window.location.href = 'Login.html';
+    return;
+  }
+  
+  window.location.href = `Booking.html?provider=${providerId}&service=${serviceName}`;
+}
 
 // ===================================================================
-// 🛒 ORDERABLE SHOPS (GROCERY, MEDICINE, READY-TO-EAT)
+// 🛒 ORDERABLE SHOPS (FROM MYSQL)
 // ===================================================================
 async function loadOrderData(category) {
   try {
-    const response = await fetch("../data/grocery-menus.json");
-    if (!response.ok) throw new Error("Failed to load shop data");
+    const categoryId = CATEGORY_MAP[category.toLowerCase().replace('-', '')];
+    
+    if (!categoryId) {
+      throw new Error('Invalid category');
+    }
 
-    const allShops = await response.json();
-    const filteredShops = allShops.filter(
-      (shop) =>
-        shop.category === category.replace("-", "").replace(" ", "").toLowerCase()
-    );
+    // Fetch shops from MySQL API
+    const response = await fetch(`${API_URL}/providers?category_id=${categoryId}`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const shops = await response.json();
+    
+    // Update page title
+    document.getElementById("serviceTitle").textContent = 
+      `${category.charAt(0).toUpperCase() + category.slice(1)} Stores`;
+    document.getElementById("serviceDescription").textContent = 
+      `Order from local ${category} providers`;
 
-    renderOrderShops(filteredShops, category);
+    renderOrderShops(shops, category);
+    
   } catch (error) {
     console.error("Error in loadOrderData:", error);
     showErrorMessage(category);
@@ -127,44 +198,47 @@ async function loadOrderData(category) {
 function renderOrderShops(stores, category) {
   const container = document.getElementById("providerListings");
   if (!container) return;
+  
   container.innerHTML = "";
 
   if (!stores || stores.length === 0) {
-    container.innerHTML = `<p style="text-align:center;color:#ccc;">No ${category} shops available.</p>`;
+    container.innerHTML = `
+      <p style="text-align:center;color:#ccc;padding:40px;">
+        No ${category} shops available.
+      </p>`;
     return;
   }
 
   stores.forEach((shop) => {
-    // ✅ FIX for new property names & value casing
-    const isAvailable =
-      shop.status.toLowerCase() === "available" || shop.status.toLowerCase() === "open";
+    const isAvailable = shop.status === 'active';
     const statusClass = isAvailable ? "available" : "busy";
     const buttonText = isAvailable ? "Order Now" : "Closed";
     const buttonClass = isAvailable ? "btn-primary" : "btn-secondary";
 
-    // ✅ FIX for Specialities/Speciality variations
-    const specialities =
-      shop.Specialities || shop.Speciality || ["General Store"];
-
-    const skillsHTML = specialities.map((s) => `<span>${s}</span>`).join("");
+    // Extract specialities from description
+    const specialities = shop.description ? 
+      shop.description.split(',').slice(0, 3) : 
+      ['General Store'];
+    const skillsHTML = specialities.map((s) => `<span>${s.trim()}</span>`).join("");
 
     const card = document.createElement("div");
     card.className = "provider-card";
 
     card.innerHTML = `
       <div class="profile-section">
-        <img src="${shop.image}" alt="${shop.name}">
+        <img src="${shop.profile_image || 'https://via.placeholder.com/100'}" 
+             alt="${shop.name}">
         <div class="profile-info">
           <h3>${shop.name}</h3>
-          <p class="location">${shop.city}</p>
+          <p class="location">${shop.business_address || 'Location not specified'}</p>
         </div>
       </div>
       <div class="details-section">
         <div class="detail-item availability ${statusClass}">
-          <strong>Status:</strong> <span>${shop.status}</span>
+          <strong>Status:</strong> <span>${isAvailable ? 'Open' : 'Closed'}</span>
         </div>
         <div class="detail-item">
-          <strong>Delivery:</strong> ${shop.delivery}
+          <strong>Delivery:</strong> Available
         </div>
         <div class="detail-item skills">
           <strong>Specialities:</strong><div>${skillsHTML}</div>
@@ -172,8 +246,7 @@ function renderOrderShops(stores, category) {
       </div>
       <div class="action-section">
         <button class="btn ${buttonClass}" 
-                data-id="${shop.id}" 
-                data-cat="${category}" 
+                onclick="orderFromShop(${shop.id}, '${category}')"
                 ${!isAvailable ? "disabled" : ""}>
           ${buttonText}
         </button>
@@ -182,17 +255,19 @@ function renderOrderShops(stores, category) {
 
     container.appendChild(card);
   });
-
-  document.querySelectorAll(".btn.btn-primary").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const id = e.target.dataset.id;
-      const cat = e.target.dataset.cat;
-      if (!id || !cat) return;
-      window.location.href = `order.html?shop=${id}&category=${cat}`;
-    });
-  });
 }
 
+function orderFromShop(shopId, category) {
+  const token = localStorage.getItem('authToken');
+  
+  if (!token) {
+    alert('Please login to place an order');
+    window.location.href = 'Login.html';
+    return;
+  }
+  
+  window.location.href = `order.html?shop=${shopId}&category=${category}`;
+}
 
 // ===================================================================
 // 🧭 FILTER & ERROR HANDLING
@@ -214,9 +289,9 @@ function showErrorMessage(serviceName) {
     container.innerHTML = `
       <div style="text-align:center;padding:40px;color:#ccc;">
         <h3>Unable to load ${serviceName} data</h3>
-        <p>Please make sure you're running a local server.</p>
+        <p>Please ensure the backend server is running.</p>
         <p style="font-size:0.9rem;color:#999;">
-          Example: <code>python -m http.server 8000</code>
+          Run: <code>cd server && npm run dev</code>
         </p>
       </div>`;
   }

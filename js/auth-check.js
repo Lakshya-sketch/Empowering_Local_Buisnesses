@@ -1,4 +1,6 @@
 // auth-check.js - Common authentication checker for all pages
+const API_URL = 'http://localhost:5500/api';
+
 document.addEventListener("DOMContentLoaded", () => {
     checkAuthStatus();
 });
@@ -27,6 +29,11 @@ function updateNavForLoggedInUser(desktopNav, mobileNav, username) {
     const currentPath = window.location.pathname;
     const isInPagesFolder = currentPath.includes('/pages/');
     const profilePath = isInPagesFolder ? 'profile.html' : 'pages/profile.html';
+    const adminPath = isInPagesFolder ? 'admin.html' : 'pages/admin.html';
+    
+    // Check if user is admin
+    const userRole = localStorage.getItem('userRole');
+    const isAdmin = userRole === 'admin';
     
     // Update desktop navigation
     const desktopLoginLink = desktopNav.querySelector('a[href*="Login.html"]');
@@ -34,7 +41,11 @@ function updateNavForLoggedInUser(desktopNav, mobileNav, username) {
     
     if (desktopLoginLink) {
         const li = desktopLoginLink.parentElement;
-        li.innerHTML = `<a href="${profilePath}">Profile (${username})</a>`;
+        if (isAdmin) {
+            li.innerHTML = `<a href="${adminPath}">Admin</a>`;
+        } else {
+            li.innerHTML = `<a href="${profilePath}">Profile (${username})</a>`;
+        }
     }
     
     if (desktopRegisterLink) {
@@ -48,8 +59,13 @@ function updateNavForLoggedInUser(desktopNav, mobileNav, username) {
         const mobileRegisterLink = mobileNav.querySelector('a[href*="Signup.html"]');
         
         if (mobileLoginLink) {
-            mobileLoginLink.textContent = `Profile (${username})`;
-            mobileLoginLink.href = profilePath;
+            if (isAdmin) {
+                mobileLoginLink.textContent = 'Admin';
+                mobileLoginLink.href = adminPath;
+            } else {
+                mobileLoginLink.textContent = `Profile (${username})`;
+                mobileLoginLink.href = profilePath;
+            }
         }
         
         if (mobileRegisterLink) {

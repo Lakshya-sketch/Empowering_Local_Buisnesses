@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.3",
+    "nodemon": "^3.1.11"
+  },
+  "name": "empowering_local_buisnesses",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/server.js",
+  "dev": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lakshya-sketch/Empowering_Local_Buisnesses.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lakshya-sketch/Empowering_Local_Buisnesses/issues"
+  },
+  "homepage": "https://github.com/Lakshya-sketch/Empowering_Local_Buisnesses#readme"
+}

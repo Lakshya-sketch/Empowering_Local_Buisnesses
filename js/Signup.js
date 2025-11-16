@@ -1,3 +1,5 @@
+const API_URL = 'http://localhost:5500/api';
+
 document.addEventListener("DOMContentLoaded", () => {
     // Hamburger menu
     const hamburger = document.querySelector('.hamburger-menu');
@@ -10,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Close mobile menu on link click
     document.querySelectorAll('.mobile-nav a').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
@@ -18,13 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Signup form submission
+    // Signup form
     const signupForm = document.getElementById('signupForm');
     const usernameError = document.getElementById('usernameError');
     const passwordError = document.getElementById('passwordError');
     const signupError = document.getElementById('signupError');
 
-    signupForm.addEventListener('submit', (e) => {
+    signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         // Clear previous errors
@@ -39,17 +40,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const confirmPassword = document.getElementById('confirmPassword').value.trim();
         const termsChecked = document.getElementById('terms').checked;
 
-        // Validation
+        // Frontend validation
         let hasError = false;
 
-        // Username validation
         if (username.length < 3) {
             usernameError.textContent = 'Username must be at least 3 characters';
             usernameError.classList.remove('hidden');
             hasError = true;
         }
 
-        // Password validation
         if (password.length < 6) {
             passwordError.textContent = 'Password must be at least 6 characters';
             passwordError.classList.remove('hidden');
@@ -70,56 +69,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (hasError) return;
 
-        // Get existing users from localStorage (initialize if doesn't exist)
-        let users = JSON.parse(localStorage.getItem('users')) || [];
-
-        // Check if username already exists
-        const userExists = users.some(u => u.username === username);
-
-        if (userExists) {
-            usernameError.textContent = 'Username already taken';
-            usernameError.classList.remove('hidden');
-            return;
-        }
-
-        // Check if email already exists
-        const emailExists = users.some(u => u.email === email);
-
-        if (emailExists) {
-            signupError.textContent = 'Email already registered';
-            signupError.classList.remove('hidden');
-            return;
-        }
-
-        // Create new user object
-        const newUser = {
-            fullName,
-            username,
-            email,
-            password,
-            createdAt: new Date().toISOString()
+        // Send to MySQL backend
+        const userData = {
+            full_name: fullName,
+            username: username,
+            email: email,
+            phone: '', // Add phone field if you have it
+            password: password
         };
 
-        // Add new user to array
-        users.push(newUser);
+        try {
+            const response = await fetch(`${API_URL}/auth/signup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            });
 
-        // Save updated users array to localStorage
-        localStorage.setItem('users', JSON.stringify(users));
+            const data = await response.json();
 
-        // Log for debugging
-        console.log('New user registered:', { username, email });
-        console.log('Total users:', users.length);
+            if (response.ok) {
+                signupError.style.backgroundColor = 'rgba(40, 167, 69, 0.2)';
+                signupError.style.borderColor = '#28a745';
+                signupError.style.color = '#28a745';
+                signupError.textContent = 'Account created successfully! Redirecting to login...';
+                signupError.classList.remove('hidden');
 
-        // Show success message
-        signupError.style.backgroundColor = 'rgba(40, 167, 69, 0.2)';
-        signupError.style.borderColor = '#28a745';
-        signupError.style.color = '#28a745';
-        signupError.textContent = 'Account created successfully! Redirecting to login...';
-        signupError.classList.remove('hidden');
-
-        // Redirect to login after 2 seconds
-        setTimeout(() => {
-            window.location.href = 'Login.html';
-        }, 2000);
+                setTimeout(() => {
+                    window.location.href = 'Login.html';
+                }, 2000);
+            } else {
+                // Handle specific errors
+                if (data.message.includes('username')) {
+                    usernameError.textContent = data.message;
+                    usernameError.classList.remove('hidden');
+                } else if (data.message.includes('email')) {
+                    signupError.textContent = 'Email already registered';
+                    signupError.classList.remove('hidden');
+                } else {
+                    signupError.textContent = data.message || 'Registration failed';
+                    signupError.classList.remove('hidden');
+                }
+            }
+        } catch (error) {
+            console.error('Signup error:', error);
+            signupError.textContent = 'Registration failed. Please check your connection.';
+            signupError.classList.remove('hidden');
+        }
     });
 });

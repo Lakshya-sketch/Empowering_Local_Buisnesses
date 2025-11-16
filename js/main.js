@@ -1,3 +1,5 @@
+const API_URL = 'http://localhost:5500/api';
+
 document.addEventListener('DOMContentLoaded', () => {
     // Hamburger menu functionality
     const hamburger = document.querySelector('.hamburger-menu');
