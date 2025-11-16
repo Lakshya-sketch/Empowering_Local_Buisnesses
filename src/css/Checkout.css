@@ -1,0 +1,141 @@
+/* --- Checkout Container --- */
+.checkout-container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: linear-gradient(135deg, rgba(1, 35, 77, 0.8) 0%, rgba(0, 20, 50, 0.8) 100%);
+    border: 2px solid rgba(255, 217, 61, 0.2);
+    border-radius: 15px;
+    padding: 50px;
+    box-shadow: 0 15px 40px rgba(0, 140, 255, 0.2), 0 0 30px rgba(255, 217, 61, 0.1);
+}
+
+.checkout-container h1 {
+    text-align: center;
+    color: #FFD93D;
+    margin-top: 0;
+}
+
+/* --- Order List --- */
+.order-list {
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item-name {
+    color: #f0f0f0;
+}
+
+.order-item-price {
+    color: #FFD93D;
+    font-weight: 600;
+}
+
+.order-total {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 217, 61, 0.1);
+    border: 1px solid rgba(255, 217, 61, 0.3);
+    border-radius: 8px;
+    color: #FFD93D;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: right;
+}
+
+/* --- Checkout Details --- */
+.checkout-details {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.checkout-details h2 {
+    color: #FFD93D;
+    margin-bottom: 20px;
+}
+
+#checkoutForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#checkoutForm input,
+#checkoutForm textarea {
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #f0f0f0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#checkoutForm input:focus,
+#checkoutForm textarea:focus {
+    outline: none;
+    border-color: #FFD93D;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(255, 217, 61, 0.1);
+}
+
+#checkoutForm input::placeholder,
+#checkoutForm textarea::placeholder {
+    color: rgba(240, 240, 240, 0.4);
+}
+
+#checkoutForm textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* --- Place Order Button --- */
+.place-order-btn {
+    padding: 14px;
+    background: #FFD93D;
+    color: #001122;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.place-order-btn:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 217, 61, 0.3);
+}
+
+.place-order-btn:active {
+    transform: translateY(0);
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+    .checkout-container {
+        margin: 30px 10px;
+        padding: 20px;
+    }
+
+    .checkout-container h1 {
+        font-size: 1.8rem;
+    }
+}

@@ -10,7 +10,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   updateActiveFilter(selectedService);
 
+<<<<<<< HEAD
   // ===== hamburger toggle =====
+=======
+>>>>>>> 5d13609e6d06b06c6b93100619b736bd835f3b3f
   const hamburger = document.querySelector(".hamburger-menu");
   const mobileNav = document.querySelector(".mobile-nav");
   if (hamburger) {
@@ -27,6 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
+<<<<<<< HEAD
 // ===================================================================
 // 📦 NORMAL SERVICE PROVIDERS (BOOKING TYPE)
 // ===================================================================
@@ -35,6 +39,17 @@ async function loadServiceData(serviceName) {
     const jsonFile = `../data/${serviceName}-data.json`;
     const response = await fetch(jsonFile);
 
+=======
+
+// ===================================================================
+// 📦 NORMAL SERVICE PROVIDERS (BOOKING TYPE)
+// ===================================================================
+async function loadServiceData(serviceName) {
+  try {
+    const jsonFile = `../data/${serviceName}-data.json`;
+    const response = await fetch(jsonFile);
+
+>>>>>>> 5d13609e6d06b06c6b93100619b736bd835f3b3f
     if (!response.ok) throw new Error(`Failed to load ${serviceName} data`);
 
     const serviceData = await response.json();
@@ -100,6 +115,7 @@ function createProviderCard(provider, serviceName) {
       </a>
     </div>`;
   return card;
+<<<<<<< HEAD
 }
 async function loadOrderData(category) {
   try {
@@ -120,6 +136,32 @@ async function loadOrderData(category) {
   }
 }
 
+=======
+}
+
+
+// ===================================================================
+// 🛒 ORDERABLE SHOPS (GROCERY, MEDICINE, READY-TO-EAT)
+// ===================================================================
+async function loadOrderData(category) {
+  try {
+    const response = await fetch("../data/grocery-menus.json");
+    if (!response.ok) throw new Error("Failed to load shop data");
+
+    const allShops = await response.json();
+    const filteredShops = allShops.filter(
+      (shop) =>
+        shop.category === category.replace("-", "").replace(" ", "").toLowerCase()
+    );
+
+    renderOrderShops(filteredShops, category);
+  } catch (error) {
+    console.error("Error in loadOrderData:", error);
+    showErrorMessage(category);
+  }
+}
+
+>>>>>>> 5d13609e6d06b06c6b93100619b736bd835f3b3f
 function renderOrderShops(stores, category) {
   const container = document.getElementById("providerListings");
   if (!container) return;
@@ -131,12 +173,22 @@ function renderOrderShops(stores, category) {
   }
 
   stores.forEach((shop) => {
+<<<<<<< HEAD
     const isAvailable =
       shop.status && (shop.status.toLowerCase() === "available" || shop.status.toLowerCase() === "open");
+=======
+    // ✅ FIX for new property names & value casing
+    const isAvailable =
+      shop.status.toLowerCase() === "available" || shop.status.toLowerCase() === "open";
+>>>>>>> 5d13609e6d06b06c6b93100619b736bd835f3b3f
     const statusClass = isAvailable ? "available" : "busy";
     const buttonText = isAvailable ? "Order Now" : "Closed";
     const buttonClass = isAvailable ? "btn-primary" : "btn-secondary";
 
+<<<<<<< HEAD
+=======
+    // ✅ FIX for Specialities/Speciality variations
+>>>>>>> 5d13609e6d06b06c6b93100619b736bd835f3b3f
     const specialities =
       shop.Specialities || shop.Speciality || ["General Store"];
 
@@ -187,6 +239,10 @@ function renderOrderShops(stores, category) {
   });
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5d13609e6d06b06c6b93100619b736bd835f3b3f
 // ===================================================================
 // 🧭 FILTER & ERROR HANDLING
 // ===================================================================

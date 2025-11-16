@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     
     if (isLoggedIn !== 'true') {
-        // Redirect to login if not logged in
         window.location.href = 'Login.html';
         return;
     }

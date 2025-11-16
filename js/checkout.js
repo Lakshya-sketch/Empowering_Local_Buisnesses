@@ -40,12 +40,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // Display ordered items
   let total = 0;
   cart.forEach((item) => {
+<<<<<<< HEAD
     const qty = item.qty ? item.qty : 1;
     const div = document.createElement("div");
     div.classList.add("order-item");
     div.innerHTML = `<span>${item.name} x${qty}</span><span>₹${item.price * qty}</span>`;
     orderList.appendChild(div);
     total += item.price * qty;
+=======
+    const div = document.createElement("div");
+    div.classList.add("order-item");
+    div.innerHTML = `<span>${item.name} x${item.qty}</span><span>₹${item.price * item.qty}</span>`;
+    orderList.appendChild(div);
+    total += item.price * item.qty;
+>>>>>>> 5d13609e6d06b06c6b93100619b736bd835f3b3f
   });
   orderTotal.textContent = `Total: ₹${total}`;
 

@@ -14,15 +14,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const res = await fetch("../data/grocery-menus.json");
     const data = await res.json();
+<<<<<<< HEAD
     // data.menus for correct structure!
     const shop = (data.menus || data).find((s) => 
       (s.id || s.shopId || s.providerId || s.pharmacyId).toString() === shopId
     );
+=======
+    const shop = data.find((s) => s.id === shopId);
+>>>>>>> 5d13609e6d06b06c6b93100619b736bd835f3b3f
     if (!shop) {
       storeName.textContent = "Shop not found.";
       return;
     }
+<<<<<<< HEAD
     storeName.textContent = `Order from ${shop.shop || shop.restaurant || shop.name || shop.pharmacy}`;
+=======
+
+    storeName.textContent = `Order from ${shop.name}`;
+>>>>>>> 5d13609e6d06b06c6b93100619b736bd835f3b3f
     renderItems(shop.menu);
   } catch (err) {
     console.error("Error loading menu:", err);
@@ -57,8 +66,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         const id = btn.dataset.id;
         const name = btn.dataset.name;
         const price = parseFloat(btn.dataset.price);
+<<<<<<< HEAD
         const qtyInput = document.getElementById(`qty-${id}`);
         const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+=======
+        const qty = parseInt(document.getElementById(`qty-${id}`).value) || 1;
+>>>>>>> 5d13609e6d06b06c6b93100619b736bd835f3b3f
 
         const existing = cart.find((i) => i.id === id);
         if (existing) existing.qty += qty;
