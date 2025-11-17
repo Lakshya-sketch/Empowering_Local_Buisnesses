@@ -1,9 +1,6 @@
 .App {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   min-height: 100vh;
-}
-
-.main-content {
-  flex: 1;
+  position: relative;
+  overflow-x: hidden;
 }

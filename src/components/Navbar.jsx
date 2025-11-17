@@ -1,87 +1,150 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import '../css/Shared.css';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import './Navbar.css';
 
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState('');
+  const [user, setUser] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    setIsLoggedIn(loggedIn);
-    if (loggedIn) {
-      setUserName(localStorage.getItem('currentUser') || 'User');
+    checkAuthStatus();
+    
+    // Listen for storage changes (login/logout events)
+    const handleStorageChange = () => {
+      checkAuthStatus();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also listen for custom login event
+    window.addEventListener('login', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('login', handleStorageChange);
+    };
+  }, [location]); // Re-check on route change
+
+  const checkAuthStatus = () => {
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user');
+    
+    console.log('Auth check - Token:', !!token, 'User:', userData); // Debug log
+    
+    if (token && userData) {
+      setIsLoggedIn(true);
+      try {
+        const parsedUser = JSON.parse(userData);
+        setUser(parsedUser);
+        console.log('User logged in:', parsedUser); // Debug log
+      } catch (e) {
+        console.error('Error parsing user data:', e);
+        setIsLoggedIn(false);
+        setUser(null);
+      }
+    } else {
+      setIsLoggedIn(false);
+      setUser(null);
     }
-
-    // Listen for storage changes
-    window.addEventListener('storage', () => {
-      const updated = localStorage.getItem('isLoggedIn') === 'true';
-      setIsLoggedIn(updated);
-    });
-  }, []);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('currentUserEmail');
-    localStorage.removeItem('currentUserFullName');
-    setIsLoggedIn(false);
+    if (window.confirm('Are you sure you want to logout?')) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      setIsLoggedIn(false);
+      setUser(null);
+      setMenuOpen(false);
+      
+      // Dispatch storage event
+      window.dispatchEvent(new Event('storage'));
+      
+      navigate('/');
+      
+      // Force reload
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
+    }
+  };
+
+  const closeMenu = () => {
     setMenuOpen(false);
-    window.location.href = '/';
   };
 
   return (
-    <header className="header">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 5%', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
-        <div className="logo">
-          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>LocalBizConnect</Link>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <Link to="/" className="navbar-logo" onClick={closeMenu}>
+          LocalBizConnect
+        </Link>
+
+        <div className="navbar-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+          <span className={menuOpen ? 'active' : ''}></span>
+          <span className={menuOpen ? 'active' : ''}></span>
+          <span className={menuOpen ? 'active' : ''}></span>
         </div>
-        <nav className="nav-links" style={{ display: 'flex', listStyle: 'none', gap: '30px' }}>
-          <Link to="/" style={{ textDecoration: 'none', color: '#fff', fontWeight: '500', transition: 'color 0.3s' }}>Home</Link>
-          <Link to="/about" style={{ textDecoration: 'none', color: '#fff', fontWeight: '500', transition: 'color 0.3s' }}>About</Link>
-          <Link to="/services?service=plumber" style={{ textDecoration: 'none', color: '#fff', fontWeight: '500', transition: 'color 0.3s' }}>Services</Link>
+
+        <ul className={`navbar-menu ${menuOpen ? 'active' : ''}`}>
+          <li className="navbar-item">
+            <Link to="/" className="navbar-link" onClick={closeMenu}>
+              Home
+            </Link>
+          </li>
+          <li className="navbar-item">
+            <Link to="/about" className="navbar-link" onClick={closeMenu}>
+              About
+            </Link>
+          </li>
+          
           {isLoggedIn ? (
             <>
-              <Link to="/profile" style={{ textDecoration: 'none', color: '#fff', fontWeight: '500', transition: 'color 0.3s' }}>{userName}</Link>
-              <a href="#logout" onClick={(e) => { e.preventDefault(); handleLogout(); }} style={{ textDecoration: 'none', color: '#fff', fontWeight: '500', cursor: 'pointer', transition: 'color 0.3s' }}>Logout</a>
+              <li className="navbar-item">
+                <Link to="/profile" className="navbar-link" onClick={closeMenu}>
+                  Profile
+                </Link>
+              </li>
+              <li className="navbar-item">
+                <Link to="/order" className="navbar-link" onClick={closeMenu}>
+                  My Orders
+                </Link>
+              </li>
+              {user?.role === 'admin' && (
+                <li className="navbar-item">
+                  <Link to="/admin" className="navbar-link navbar-link-admin" onClick={closeMenu}>
+                    Admin
+                  </Link>
+                </li>
+              )}
+              <li className="navbar-item navbar-user-info">
+                <span className="user-welcome">Hi, {user?.name || 'User'}!</span>
+              </li>
+              <li className="navbar-item">
+                <button onClick={handleLogout} className="navbar-btn navbar-btn-logout">
+                  Logout
+                </button>
+              </li>
             </>
           ) : (
             <>
-              <Link to="/login" style={{ textDecoration: 'none', color: '#fff', fontWeight: '500', transition: 'color 0.3s' }}>Login</Link>
-              <Link to="/register" style={{ textDecoration: 'none', color: '#fff', fontWeight: '500', transition: 'color 0.3s' }}>Register</Link>
+              <li className="navbar-item">
+                <Link to="/login" className="navbar-btn" onClick={closeMenu}>
+                  Login
+                </Link>
+              </li>
+              <li className="navbar-item">
+                <Link to="/register" className="navbar-btn navbar-btn-signup" onClick={closeMenu}>
+                  Sign Up
+                </Link>
+              </li>
             </>
           )}
-        </nav>
-        <div className={`hamburger-menu ${menuOpen ? 'active' : ''}`} onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        </ul>
       </div>
-      {menuOpen && (
-        <nav className="mobile-nav" style={{ position: 'fixed', top: '70px', left: 0, width: '100%', height: 'calc(100vh - 70px)', background: '#000814', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '50px', gap: '25px', zIndex: 99 }}>
-          <Link to="/" onClick={() => setMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '500' }}>Home</Link>
-          <Link to="/about" onClick={() => setMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '500' }}>About</Link>
-          <Link to="/services?service=plumber" onClick={() => setMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '500' }}>Services</Link>
-          {isLoggedIn ? (
-            <>
-              <Link to="/profile" onClick={() => setMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '500' }}>{userName}</Link>
-              <a href="#logout" onClick={(e) => { e.preventDefault(); handleLogout(); }} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '500', cursor: 'pointer' }}>Logout</a>
-            </>
-          ) : (
-            <>
-              <Link to="/login" onClick={() => setMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '500' }}>Login</Link>
-              <Link to="/register" onClick={() => setMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '500' }}>Register</Link>
-            </>
-          )}
-        </nav>
-      )}
-    </header>
+    </nav>
   );
 }
 

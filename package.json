@@ -1,29 +1,35 @@
 {
-  "dependencies": {
-    "body-parser": "^2.2.0",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "mysql2": "^3.15.3",
-    "nodemon": "^3.1.11"
-  },
-  "name": "empowering_local_buisnesses",
+  "name": "localbizconnect-frontend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
+    "react-scripts": "5.0.1"
+  },
   "scripts": {
-    "start": "node backend/server.js",
-  "dev": "nodemon backend/server.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Lakshya-sketch/Empowering_Local_Buisnesses.git"
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Lakshya-sketch/Empowering_Local_Buisnesses/issues"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
-  "homepage": "https://github.com/Lakshya-sketch/Empowering_Local_Buisnesses#readme"
+  "proxy": "http://localhost:5000"
 }

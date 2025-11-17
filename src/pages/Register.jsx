@@ -1,121 +1,154 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import '../css/Register.css';
+import '../css/Shared.css';
 
 function Register() {
   const [formData, setFormData] = useState({
-    fullName: '',
-    username: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',
-    agreeTerms: false
+    phone: '',
+    role: 'user'
   });
   const [error, setError] = useState('');
-  const [fieldErrors, setFieldErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value
+      [e.target.name]: e.target.value
     });
-    // Clear field error when user starts typing
-    if (fieldErrors[name]) {
-      setFieldErrors({ ...fieldErrors, [name]: '' });
-    }
+    setError('');
   };
 
-  const validateForm = () => {
-    const errors = {};
-    
-    if (!formData.fullName.trim()) errors.fullName = 'Full name is required';
-    if (!formData.username.trim()) errors.username = 'Username is required';
-    if (!formData.email.trim()) errors.email = 'Email is required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) 
-      errors.email = 'Invalid email format';
-    if (!formData.password) errors.password = 'Password is required';
-    else if (formData.password.length < 6) 
-      errors.password = 'Password must be at least 6 characters';
-    if (formData.password !== formData.confirmPassword) 
-      errors.confirmPassword = 'Passwords do not match';
-    if (!formData.agreeTerms) 
-      errors.agreeTerms = 'You must agree to terms and conditions';
-    
-    return errors;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
-    const errors = validateForm();
-    if (Object.keys(errors).length > 0) {
-      setFieldErrors(errors);
-      setError('Please fix the errors below');
+
+    // Validation
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
       return;
     }
 
-    setFieldErrors({});
-    
-    // Save user registration data to localStorage
-    localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('currentUser', formData.username);
-    localStorage.setItem('currentUserEmail', formData.email);
-    localStorage.setItem('currentUserFullName', formData.fullName);
-    localStorage.setItem('memberSince', new Date().toISOString());
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return;
+    }
 
-    console.log('Register data:', formData);
-    
-    // Redirect to home
-    setTimeout(() => {
-      window.location.href = '/';
-    }, 500);
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          phone: formData.phone,
+          role: formData.role
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Store token and user info
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        
+        alert(`Welcome, ${data.user.name}! Registration successful!`);
+        
+        // Dispatch storage event
+        window.dispatchEvent(new Event('storage'));
+        
+        navigate('/');
+        
+        // Force reload to update navbar
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      } else {
+        setError(data.message || 'Registration failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      setError('Network error. Please check if backend is running.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="signup-container">
-      <div className="signup-card">
+    <div className="register-container">
+      <div className="register-card">
         <h1>Create Account</h1>
-        <p className="subtitle">Join LocalBizConnect today</p>
-        
-        <form className="signup-form" onSubmit={handleSubmit}>
+        <p className="register-subtitle">Join LocalBizConnect today</p>
+
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
+            <label htmlFor="name">Full Name</label>
             <input
               type="text"
-              id="fullName"
-              name="fullName"
-              placeholder="Enter your full name"
-              value={formData.fullName}
+              id="name"
+              name="name"
+              value={formData.name}
               onChange={handleChange}
+              placeholder="John Doe"
+              required
             />
-            {fieldErrors.fullName && <div className="field-error">{fieldErrors.fullName}</div>}
           </div>
 
           <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Choose a username"
-              value={formData.username}
-              onChange={handleChange}
-            />
-            {fieldErrors.username && <div className="field-error">{fieldErrors.username}</div>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email Address</label>
             <input
               type="email"
               id="email"
               name="email"
-              placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
+              placeholder="john@example.com"
+              required
             />
-            {fieldErrors.email && <div className="field-error">{fieldErrors.email}</div>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="9876543210"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="role">Account Type</label>
+            <select
+              id="role"
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              required
+            >
+              <option value="user">Customer</option>
+              <option value="provider">Service Provider</option>
+            </select>
           </div>
 
           <div className="form-group">
@@ -124,11 +157,11 @@ function Register() {
               type="password"
               id="password"
               name="password"
-              placeholder="Create a password"
               value={formData.password}
               onChange={handleChange}
+              placeholder="Minimum 6 characters"
+              required
             />
-            {fieldErrors.password && <div className="field-error">{fieldErrors.password}</div>}
           </div>
 
           <div className="form-group">
@@ -137,33 +170,24 @@ function Register() {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              placeholder="Confirm your password"
               value={formData.confirmPassword}
               onChange={handleChange}
+              placeholder="Re-enter password"
+              required
             />
-            {fieldErrors.confirmPassword && <div className="field-error">{fieldErrors.confirmPassword}</div>}
           </div>
 
-          <div className="form-checkbox">
-            <label>
-              <input
-                type="checkbox"
-                name="agreeTerms"
-                checked={formData.agreeTerms}
-                onChange={handleChange}
-              />
-              I agree to the <a href="#terms">terms and conditions</a>
-            </label>
-            {fieldErrors.agreeTerms && <div className="field-error">{fieldErrors.agreeTerms}</div>}
-          </div>
-
-          {error && <div className="error-msg">{error}</div>}
-
-          <button type="submit" className="btn btn-primary">Register</button>
+          <button 
+            type="submit" 
+            className="btn-register"
+            disabled={loading}
+          >
+            {loading ? 'Creating Account...' : 'Sign Up'}
+          </button>
         </form>
 
-        <div className="login-link">
-          <p>Already have an account? <a href="/login">Login here</a></p>
+        <div className="register-footer">
+          <p>Already have an account? <Link to="/login">Login</Link></p>
         </div>
       </div>
     </div>

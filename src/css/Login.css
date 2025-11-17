@@ -222,3 +222,32 @@
         font-size: 1rem;
     }
 }
+
+.error-message {
+  background: rgba(255, 77, 77, 0.2);
+  border: 2px solid #ff4d4d;
+  color: #ff6b6b;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.demo-credentials {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 217, 61, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 217, 61, 0.3);
+}
+
+.demo-credentials p {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+.demo-credentials strong {
+  color: #FFD93D;
+}
